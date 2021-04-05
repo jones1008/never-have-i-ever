@@ -1,7 +1,10 @@
 <template>
   <Card>
+    <div class="absolute top-4 left-4">
+      <Dropdown></Dropdown>
+    </div>
     <button
-        class="btn btn-small absolute top-4 right-4"
+        class="btn btn-small absolute top-8 right-8"
         @click="$router.push({name: 'add-question'})"
     >
       <PlusIcon></PlusIcon>
@@ -38,10 +41,11 @@ import Question from "../entities/Question";
 import Card from "../components/Card.vue";
 
 import { ChevronLeftIcon, PlusIcon } from '@heroicons/vue/solid'
+import Dropdown from "../components/Dropdown.vue";
 
 export default defineComponent({
   name: 'Home',
-  components: {ChevronLeftIcon, PlusIcon, Card},
+  components: {Dropdown, ChevronLeftIcon, PlusIcon, Card},
   async created() {
     let questions = await this.getQuestions();
     this.questions = questions.sort((a, b) => 0.5 - Math.random());
