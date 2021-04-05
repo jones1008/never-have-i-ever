@@ -6,20 +6,49 @@
   <div class="centerer">
     <RouterView></RouterView>
   </div>
+  <MessageBox
+      v-model:message="globalSuccess"
+      color="bg-green-600"
+      :timeout="5000"
+  ></MessageBox>
+  <MessageBox
+      v-model:message="globalError"
+      color="bg-red-600"
+      :timeout="5000"
+  ></MessageBox>
 </template>
 
 <script lang="ts">
 import {defineComponent} from "vue";
+import MessageBox from './components/MessageBox.vue';
 
 export default defineComponent({
   name: 'App',
+  components: {MessageBox},
+  computed: {
+    globalError: {
+      get() {
+        return this.$store.state.globalError;
+      },
+      set(value) {
+        this.$store.commit("globalError", value)
+      }
+    },
+    globalSuccess: {
+      get() {
+        return this.$store.state.globalSuccess;
+      },
+      set(value) {
+        this.$store.commit("globalSuccess", value)
+      }
+    }
+  }
 })
 </script>
 
 <style lang="scss">
 #app {
   @apply text-center;
-  //@apply bg-gradient-to-tr from-purple-400 via-pink-500 to-red-500;
 }
 
 .caption {
@@ -33,7 +62,6 @@ export default defineComponent({
   width: 100%;
   height: 25vh;
   z-index: -1;
-  //@apply bg-gradient-to-tr from-purple-400 via-pink-500 to-red-500;
   background: rgb(246,119,48);
   background: linear-gradient(125deg, rgba(246,119,48,1) 0%, rgba(221,28,78,1) 50%, rgba(36,173,181,1) 100%);
   border-bottom-right-radius: 4rem;

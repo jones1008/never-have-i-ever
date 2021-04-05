@@ -49,8 +49,7 @@ export default defineComponent({
   data() {
     return {
       questions: [] as Question[],
-      currentQuestionIndex: 0 as number,
-      newQuestionText: "" as string
+      currentQuestionIndex: 0 as number
     }
   },
   computed: {

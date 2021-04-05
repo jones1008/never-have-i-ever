@@ -11,6 +11,9 @@ let firebaseApp = firebase.initializeApp(firebaseConfig);
 let connection = firebaseApp.firestore();
 FirestoreOrmRepository.initGlobalConnection(connection);
 
+import store from './store';
+
 createApp(App)
     .use(router)
+    .use(store)
     .mount('#app');

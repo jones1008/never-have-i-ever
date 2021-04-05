@@ -64,8 +64,12 @@ export default defineComponent({
         let question: Question = new Question();
         question.text = text;
         question.reports = 0;
-        await question.save();
-        await this.$router.push({name: "home"});
+        question.save().then(() => {
+          this.$store.commit("globalSuccess", "hinzugefügt")
+          return this.$router.push({name: "home"});
+        }).catch(err => {
+          this.$store.commit("globalError", "Fehler beim Hinzufügen")
+        });
       }
     },
   }
