@@ -62,25 +62,26 @@ export default defineComponent({
   data: () => ({
     questions: [] as Question[],
     currentQuestionIndex: 0 as number,
+    // TODO: dropdownItems irgendwie auslagern, weil es bei AddQuestion auch verwendet wird
     dropdownItems: [
       {
         text: "Alle",
         value: "all",
-        iconColor: "yellow",
+        iconColor: "text-yellow-600",
         isChosen: true,
         icon: SparklesIcon
       },
       {
         text: "Hot",
-        value: "hot",
-        iconColor: "red",
+        value: Category[Category.hot],
+        iconColor: "text-red-600",
         isChosen: false,
         icon: FireIcon
       },
       {
         text: "Party",
-        value: "party",
-        iconColor: "purple",
+        value: Category[Category.party],
+        iconColor: "text-purple-600",
         isChosen: false,
         icon: CakeIcon
       }
@@ -116,7 +117,6 @@ export default defineComponent({
         return this.getAllQuestions();
       }
       let categoryObj: Category = Category[category];
-      console.log("getting questions with category", categoryObj)
       return Question.find("categories", "array-contains", categoryObj);
     },
     reportQuestion() {

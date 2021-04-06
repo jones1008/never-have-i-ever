@@ -8,7 +8,7 @@
         class="item blank"
         @click="isOpen = !isOpen"
     >
-      <div :class="['icon', 'text-'+blank.iconColor+'-400']">
+      <div :class="['icon', blank.iconColor]">
         <ChevronDownIcon></ChevronDownIcon>
       </div>
       <span v-show="chosenItems.length === 0 || isOpen">
@@ -28,8 +28,8 @@
         :class="['item', {isChosen: item.isChosen}]"
         @click="isOpen ? item.isChosen ? unselect(item) : select(item) : isOpen = true"
     >
-      <div :class="['icon', 'text-'+item.iconColor+'-600']">
-        <component :is="item.icon"></component>
+      <div class="icon">
+        <component :is="item.icon" :class="item.iconColor"></component>
       </div>
       {{ item.text }}&nbsp;
       <ChevronDownIcon v-show="item.isChosen && !isOpen"></ChevronDownIcon>
@@ -124,7 +124,7 @@ export default defineComponent({
     @apply flex;
     @apply items-center py-2;
     .icon {
-      @apply inline mr-3;
+      @apply flex mr-3;
       svg {
         @apply h-7 w-7 inline;
       }

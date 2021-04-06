@@ -58,20 +58,20 @@ export default defineComponent({
     text: "",
     dropdownBlank: {
       text: "Kategorien",
-      iconColor: "gray"
+      iconColor: "text-gray-400"
     },
     dropdownItems: [
       {
         text: "Hot",
         value: "hot",
-        iconColor: "red",
+        iconColor: "text-red-600",
         isChosen: false,
         icon: FireIcon
       },
       {
         text: "Party",
         value: "party",
-        iconColor: "purple",
+        iconColor: "text-purple-600",
         isChosen: false,
         icon: CakeIcon
       }
