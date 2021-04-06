@@ -1,4 +1,5 @@
 import {BaseModel, Field, Model} from "@arbel/firebase-orm";
+import {Category} from "./Category";
 
 @Model({
     reference_path: "questions",
@@ -10,4 +11,7 @@ export default class Question extends BaseModel {
 
     @Field()
     reports!: number;
-}
+
+    @Field()
+    categories: Category[];
+};

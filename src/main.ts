@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
+// import VueClickAway from "vue3-click-away";
 import './index.scss'
 import router from './router';
 
@@ -13,7 +14,10 @@ FirestoreOrmRepository.initGlobalConnection(connection);
 
 import store from './store';
 
+import clickOutside from './directives/click-outside';
+
 createApp(App)
+    .directive('click-outside', clickOutside)
     .use(router)
     .use(store)
     .mount('#app');

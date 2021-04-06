@@ -1,16 +1,13 @@
 <template>
   <Card>
-    <div class="absolute top-4 left-4">
-      <Dropdown></Dropdown>
-    </div>
-    <button
-        class="btn btn-small absolute top-8 right-8"
-        @click="$router.push({name: 'add-question'})"
-    >
-      <PlusIcon></PlusIcon>
-    </button>
     <template v-slot:card-text>
-      <p v-if="currentQuestion">
+      <p
+          v-if="errorMessage"
+          class="text-gray-400"
+      >
+        {{ errorMessage }}
+      </p>
+      <p v-else-if="currentQuestion">
         ...{{currentQuestion.text}}
       </p>
       <p v-else>
@@ -31,6 +28,16 @@
         <span>Weiter</span>
       </button>
     </template>
+
+    <div class="absolute top-3 left-4 ">
+      <Dropdown v-model:items="dropdownItems"></Dropdown>
+    </div>
+    <button
+        class="btn btn-small absolute top-8 right-8"
+        @click="$router.push({name: 'add-question'})"
+    >
+      <PlusIcon></PlusIcon>
+    </button>
   </Card>
   <RouterView></RouterView>
 </template>
@@ -41,21 +48,45 @@ import Question from "../entities/Question";
 import Card from "../components/Card.vue";
 
 import { ChevronLeftIcon, PlusIcon } from '@heroicons/vue/solid'
+import { FireIcon, CakeIcon, SparklesIcon } from '@heroicons/vue/outline'
+
 import Dropdown from "../components/Dropdown.vue";
+import {Category} from "../entities/Category";
 
 export default defineComponent({
   name: 'Home',
-  components: {Dropdown, ChevronLeftIcon, PlusIcon, Card},
+  components: {Dropdown, ChevronLeftIcon, PlusIcon, Card, SparklesIcon, FireIcon, CakeIcon},
   async created() {
-    let questions = await this.getQuestions();
-    this.questions = questions.sort((a, b) => 0.5 - Math.random());
+    this.refetchQuestions();
   },
-  data() {
-    return {
-      questions: [] as Question[],
-      currentQuestionIndex: 0 as number
-    }
-  },
+  data: () => ({
+    questions: [] as Question[],
+    currentQuestionIndex: 0 as number,
+    dropdownItems: [
+      {
+        text: "Alle",
+        value: "all",
+        iconColor: "yellow",
+        isChosen: true,
+        icon: SparklesIcon
+      },
+      {
+        text: "Hot",
+        value: "hot",
+        iconColor: "red",
+        isChosen: false,
+        icon: FireIcon
+      },
+      {
+        text: "Party",
+        value: "party",
+        iconColor: "purple",
+        isChosen: false,
+        icon: CakeIcon
+      }
+    ],
+    errorMessage: null
+  }),
   computed: {
     currentQuestion() : Question|null {
       if (this.questions.length > 0) {
@@ -68,33 +99,65 @@ export default defineComponent({
     },
     isFirstQuestion(): boolean {
       return this.currentQuestionIndex === 0;
+    },
+    chosenDropdownItem() {
+      return this.dropdownItems.find(i => i.isChosen);
+    },
+    chosenCategory() {
+      return this.chosenDropdownItem.value;
     }
   },
   methods: {
-    async getQuestions(): Promise<Array<Question>> {
-    return Question.getAll();
-  },
-  reportQuestion() {
-    if (this.currentQuestion) {
-      this.currentQuestion.reports++;
-      this.currentQuestion.save();
+    async getAllQuestions(): Promise<Array<Question>> {
+      return Question.getAll();
+    },
+    async getQuestions(category: String = "all"): Promise<Array<Question>> {
+      if (category == "all") {
+        return this.getAllQuestions();
+      }
+      let categoryObj: Category = Category[category];
+      console.log("getting questions with category", categoryObj)
+      return Question.find("categories", "array-contains", categoryObj);
+    },
+    reportQuestion() {
+      if (this.currentQuestion) {
+        this.currentQuestion.reports++;
+        this.currentQuestion.save();
+      }
+    },
+    nextQuestion(): void {
+      if (this.isLastQuestion) {
+        this.currentQuestionIndex = 0;
+      } else {
+        this.currentQuestionIndex++;
+      }
+    },
+    prevQuestion(): void {
+      if (this.isFirstQuestion) {
+        this.currentQuestionIndex = this.questions.length - 1;
+      } else {
+        this.currentQuestionIndex--;
+      }
+    },
+    refetchQuestions() {
+      this.errorMessage = null;
+      this.getQuestions(this.chosenCategory).then(questions => {
+        if (questions.length === 0) {
+          this.errorMessage = "Keine Fragen gefunden..."
+          return;
+        }
+        this.questions = questions.sort((a, b) => 0.5 - Math.random());
+      }).catch(err => {
+        console.log(err);
+        this.$store.commit("globalError", "Fehler beim Laden der Fragen");
+      });
     }
   },
-  nextQuestion(): void {
-    if (this.isLastQuestion) {
-      this.currentQuestionIndex = 0;
-    } else {
-      this.currentQuestionIndex++;
-    }
-  },
-  prevQuestion(): void {
-    if (this.isFirstQuestion) {
-      this.currentQuestionIndex = this.questions.length - 1;
-    } else {
-      this.currentQuestionIndex--;
+  watch: {
+    chosenDropdownItem(item) {
+      this.refetchQuestions();
     }
   }
-}
 })
 </script>
 

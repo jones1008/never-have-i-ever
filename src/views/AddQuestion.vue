@@ -1,9 +1,6 @@
 <template>
-  <Overlay></Overlay>
+  <Overlay :onClick="goHome"></Overlay>
   <Card>
-    <template v-slot:card-heading>
-      Frage hinzufügen:
-    </template>
     <template v-slot:card-text>
       <span
           class="text-gray-400"
@@ -21,7 +18,7 @@
     <template v-slot:card-action>
       <button
           class="btn"
-          @click="$router.go(-1)"
+          @click="goHome"
       >
         <XIcon></XIcon>
       </button>
@@ -32,6 +29,14 @@
         <span>Speichern</span>
       </button>
     </template>
+
+    <div class="absolute top-3 left-4">
+      <Dropdown
+          v-model:items="dropdownItems"
+          :blank="dropdownBlank"
+          multiple
+      ></Dropdown>
+    </div>
   </Card>
 </template>
 
@@ -39,17 +44,50 @@
 import {defineComponent} from "vue";
 import Overlay from "../components/Overlay.vue";
 import Card from "../components/Card.vue";
+import Dropdown from "../components/Dropdown.vue";
 import { XIcon } from '@heroicons/vue/solid'
 import Question from "../entities/Question";
+import { FireIcon, CakeIcon } from '@heroicons/vue/outline'
+import {Category} from "../entities/Category";
 
 export default defineComponent({
   name: "AddQuestion",
-  components: {Card, Overlay, XIcon},
+  components: {Card, Overlay, XIcon, Dropdown},
   data: () => ({
     text: "",
+    dropdownBlank: {
+      text: "Kategorien",
+      iconColor: "gray"
+    },
+    dropdownItems: [
+      {
+        text: "Hot",
+        value: "hot",
+        iconColor: "red",
+        isChosen: false,
+        icon: FireIcon
+      },
+      {
+        text: "Party",
+        value: "party",
+        iconColor: "purple",
+        isChosen: false,
+        icon: CakeIcon
+      }
+    ]
   }),
   mounted() {
     this.focusText();
+  },
+  computed: {
+    chosenCategories(): Category[] {
+      let items = this.dropdownItems.filter(i => i.isChosen);
+      let categories: Category[] = [];
+      for (let item of items) {
+        categories.push(Category[item.value]);
+      }
+      return categories;
+    }
   },
   methods: {
     onInput(e: Event) {
@@ -59,11 +97,16 @@ export default defineComponent({
       this.$refs.text.focus();
     },
     async addQuestion(): void {
+      if (this.chosenCategories.length === 0) {
+        this.$store.commit("globalError", "Kategorie wählen")
+        return;
+      }
       if (this.text) {
         let text = this.text.trim().replace(/^ich hab*. noch nie/i, '').trim();
         let question: Question = new Question();
         question.text = text;
         question.reports = 0;
+        question.categories = this.chosenCategories;
         question.save().then(() => {
           this.$store.commit("globalSuccess", "hinzugefügt")
           return this.$router.push({name: "home"});
@@ -72,6 +115,9 @@ export default defineComponent({
         });
       }
     },
+    goHome() {
+      this.$router.push({name: 'home'})
+    }
   }
 })
 </script>

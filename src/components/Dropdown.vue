@@ -1,40 +1,116 @@
 <template>
   <div
       :class="['dropdown', {isOpen: isOpen}]"
-      @click="isOpen = !isOpen"
-      @click:outside="isOpen = false"
+      v-click-outside="close"
   >
-    <div class="item chosen">
-      <div class="icon text-yellow-600">
-        <SparklesIcon></SparklesIcon>
+    <div
+        v-if="blank || blank && isOpen"
+        class="item blank"
+        @click="isOpen = !isOpen"
+    >
+      <div :class="['icon', 'text-'+blank.iconColor+'-400']">
+        <ChevronDownIcon></ChevronDownIcon>
       </div>
-      Alle&nbsp;<ChevronDownIcon></ChevronDownIcon>
+      <span v-show="chosenItems.length === 0 || isOpen">
+        {{ blank.text }}&nbsp;
+      </span>
+      <div
+          v-show="chosenItems.length > 0 && !isOpen"
+          class="text-black"
+      >
+        {{ chosenItemsText }}
+      </div>
     </div>
-    <div class="item">
-      <div class="icon text-red-600">
-        <FireIcon></FireIcon>
+    <div
+        v-for="(item, index) in realItems"
+        :key="index"
+        v-show="isOpen || item.isChosen && !multiple"
+        :class="['item', {isChosen: item.isChosen}]"
+        @click="isOpen ? item.isChosen ? unselect(item) : select(item) : isOpen = true"
+    >
+      <div :class="['icon', 'text-'+item.iconColor+'-600']">
+        <component :is="item.icon"></component>
       </div>
-      Hot
-    </div>
-    <div class="item">
-      <div class="icon text-purple-600">
-        <CakeIcon></CakeIcon>
-      </div>
-      Party
+      {{ item.text }}&nbsp;
+      <ChevronDownIcon v-show="item.isChosen && !isOpen"></ChevronDownIcon>
+      <CheckIcon v-show="item.isChosen && isOpen" class="text-blue-600"></CheckIcon>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { ChevronDownIcon, FireIcon, CakeIcon, SparklesIcon} from '@heroicons/vue/outline'
+import { ChevronDownIcon, CheckIcon} from '@heroicons/vue/outline'
 
 export default defineComponent({
   name: "Dropdown",
-  components: {ChevronDownIcon, FireIcon, CakeIcon, SparklesIcon},
+  props: {
+    items: {
+      text: String,
+      isChosen: {
+        type: Boolean,
+        default: false
+      },
+      iconColor: String,
+      icon: Function
+    },
+    blank: {
+      text: String,
+      iconColor: String,
+      icon: Function
+    },
+    multiple: {
+      type: Boolean,
+      default: false
+    }
+  },
+  components: {ChevronDownIcon, CheckIcon},
   data: () => ({
-    isOpen: false
-  })
+    isOpen: false as boolean,
+  }),
+  computed: {
+    chosenItems() {
+      return this.realItems.filter(i => i.isChosen);
+    },
+    chosenItemsText() {
+      return this.chosenItems.map(i => i.text).join(', ')
+    },
+    realItems: {
+      get() {
+        return this.items;
+      },
+      set(value) {
+        this.$emit('update:items', value);
+      }
+    }
+  },
+  methods: {
+    select(item) {
+      if (!this.multiple) {
+        this.resetSelects();
+      }
+      item.isChosen = true;
+      if (!this.multiple) {
+        this.isOpen = false;
+      }
+    },
+    unselect(item) {
+      if (this.multiple) {
+        item.isChosen = false;
+      } else {
+        this.isOpen = false;
+      }
+    },
+    resetSelects() {
+      for (let item of this.chosenItems){
+        item.isChosen = false;
+      }
+    },
+    close() {
+      console.log("closing");
+      this.isOpen = false;
+    }
+  }
 });
 </script>
 
@@ -45,31 +121,42 @@ export default defineComponent({
   @apply cursor-pointer select-none;
 
   .item {
-    display: none;
+    @apply flex;
     @apply items-center py-2;
     .icon {
       @apply inline mr-3;
       svg {
-        @apply h-7 w-7;
+        @apply h-7 w-7 inline;
       }
     }
-    &.chosen {
+    &.isChosen {
       @apply flex;
       @apply text-2xl font-extrabold text-gray-500;
-      > svg {
-        @apply h-5 w-4 inline;
-      }
+    }
+    &.blank {
+      @apply text-xl text-gray-400;
+    }
+    > svg {
+      @apply inline h-5 w-5;
     }
   }
 
   &.isOpen {
     @apply rounded-3xl bg-white shadow-2xl;
     .item {
-      @apply flex;
-      &.chosen {
+      //@apply flex;
+      &.isChosen {
         @apply text-black;
       }
     }
+  }
+}
+@keyframes dropdown-open {
+  from {
+    height: 0;
+  }
+  to {
+    height: 100%;
   }
 }
 </style>

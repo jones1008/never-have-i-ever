@@ -1,7 +1,7 @@
 <template>
   <div
       class="overlay"
-      @click="$router.go(-1)"
+      @click="onClick"
   ></div>
 </template>
 
@@ -9,7 +9,8 @@
 import {defineComponent} from "vue";
 
 export default defineComponent({
-  name: "Overlay"
+  name: "Overlay",
+  props: ["onClick"]
 });
 </script>
 

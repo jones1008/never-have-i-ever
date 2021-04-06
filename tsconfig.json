@@ -12,7 +12,8 @@
     "types": ["vite/client"],
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "strictPropertyInitialization" : false
+    "strictPropertyInitialization" : false,
+    "noImplicitAny": false
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
 }
