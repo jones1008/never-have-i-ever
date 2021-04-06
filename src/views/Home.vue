@@ -16,14 +16,14 @@
     </template>
     <template v-slot:card-action>
       <button
-          class="btn"
+          class="btn icon bg-gray-400"
           @click="prevQuestion"
       >
         <ChevronLeftIcon></ChevronLeftIcon>
       </button>
       <button
           @click="nextQuestion"
-          class="btn right-icon w-4/6"
+          class="btn btn-gradient w-4/6"
       >
         <span>Weiter</span>
       </button>
@@ -33,7 +33,7 @@
       <Dropdown v-model:items="dropdownItems"></Dropdown>
     </div>
     <button
-        class="btn btn-small absolute top-8 right-8"
+        class="btn btn-gradient btn-small icon absolute top-8 right-8"
         @click="$router.push({name: 'add-question'})"
     >
       <PlusIcon></PlusIcon>

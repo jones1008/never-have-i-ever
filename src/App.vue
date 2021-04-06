@@ -74,24 +74,27 @@ export default defineComponent({
 }
 
 .btn {
-  @apply p-2 relative;
+  @apply p-3 relative;
   @apply text-2xl text-white font-bold;
   border-radius: 2.5rem;
-  @apply bg-gradient-to-r from-yellow-500 to-pink-500;
   svg {
     @apply h-10 w-10;
     @apply inline;
   }
-  &.right-icon {
+  &.icon {
+    @apply p-1;
     svg {
-      position: absolute;
-      right: 0.5rem;
-      top: 50%;
-      transform: translateY(-50%);
+      @apply mx-1;
     }
   }
   &.btn-small {
     @apply p-0;
+    svg {
+      @apply h-9 w-9 m-1;
+    }
+  }
+  &.btn-gradient {
+    @apply bg-gradient-to-r from-yellow-500 to-pink-500;
   }
 }
 </style>

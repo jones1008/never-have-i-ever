@@ -16,14 +16,9 @@
       ></span>
     </template>
     <template v-slot:card-action>
+
       <button
-          class="btn"
-          @click="goHome"
-      >
-        <XIcon></XIcon>
-      </button>
-      <button
-          class="btn w-4/6"
+          class="btn btn-gradient w-full"
           @click="addQuestion"
       >
         <span>Speichern</span>
@@ -37,6 +32,12 @@
           multiple
       ></Dropdown>
     </div>
+    <button
+        class="btn btn-small absolute top-8 right-8 bg-gray-400"
+        @click="goHome"
+    >
+      <XIcon></XIcon>
+    </button>
   </Card>
 </template>
 
