@@ -6,3 +6,4 @@ dist-ssr
 
 .idea
 local.config.ts
+.firebase
