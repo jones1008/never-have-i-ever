@@ -1,5 +1,22 @@
 <template>
   <Card>
+    <template v-slot:card-top-left>
+      <Dropdown v-model:items="dropdownItems"></Dropdown>
+    </template>
+    <template v-slot:card-top-right-btns>
+      <button
+          class="btn btn-small icon bg-gray-400 m-2"
+          @click="$router.push({name: 'report-question'})"
+      >
+        <FlagIcon class="p-2"></FlagIcon>
+      </button>
+      <button
+          class="btn btn-gradient btn-small icon m-2"
+          @click="$router.push({name: 'add-question'})"
+      >
+        <PlusIcon></PlusIcon>
+      </button>
+    </template>
     <template v-slot:card-text>
       <p
           v-if="errorMessage"
@@ -28,16 +45,6 @@
         <span>Weiter</span>
       </button>
     </template>
-
-    <div class="absolute top-3 left-4 ">
-      <Dropdown v-model:items="dropdownItems"></Dropdown>
-    </div>
-    <button
-        class="btn btn-gradient btn-small icon absolute top-8 right-8"
-        @click="$router.push({name: 'add-question'})"
-    >
-      <PlusIcon></PlusIcon>
-    </button>
   </Card>
   <RouterView></RouterView>
 </template>
@@ -46,16 +53,18 @@
 import { defineComponent } from 'vue'
 import Question from "../entities/Question";
 import Card from "../components/Card.vue";
-
-import { ChevronLeftIcon, PlusIcon } from '@heroicons/vue/solid'
-import { FireIcon, CakeIcon, SparklesIcon } from '@heroicons/vue/outline'
-
 import Dropdown from "../components/Dropdown.vue";
 import {Category} from "../entities/Category";
+import ls from "../utils/localStorage";
+
+import { ChevronLeftIcon, PlusIcon, FlagIcon } from '@heroicons/vue/solid'
+import { FireIcon, CakeIcon, SparklesIcon } from '@heroicons/vue/outline'
+
+const reportLimit = 3;
 
 export default defineComponent({
   name: 'Home',
-  components: {Dropdown, ChevronLeftIcon, PlusIcon, Card, SparklesIcon, FireIcon, CakeIcon},
+  components: {Dropdown, ChevronLeftIcon, PlusIcon, Card, SparklesIcon, FireIcon, CakeIcon, FlagIcon},
   async created() {
     this.refetchQuestions();
   },
@@ -110,7 +119,7 @@ export default defineComponent({
   },
   methods: {
     async getAllQuestions(): Promise<Array<Question>> {
-      return Question.getAll();
+      return Question.query().where("reports", "<", reportLimit).get();
     },
     async getQuestions(category: String = "all"): Promise<Array<Question>> {
       if (category == "all") {
@@ -119,11 +128,9 @@ export default defineComponent({
       let categoryObj: Category = Category[category];
       return Question.find("categories", "array-contains", categoryObj);
     },
-    reportQuestion() {
-      if (this.currentQuestion) {
-        this.currentQuestion.reports++;
-        this.currentQuestion.save();
-      }
+    filterReported(questions: Array<Question>): Array<Question> {
+      let reportedQuestions = ls.getArray("reportedQuestionIds");
+      return questions.filter(q => !reportedQuestions.includes(q.id));
     },
     nextQuestion(): void {
       if (this.isLastQuestion) {
@@ -142,10 +149,13 @@ export default defineComponent({
     refetchQuestions() {
       this.errorMessage = null;
       this.getQuestions(this.chosenCategory).then(questions => {
+        questions = this.filterReported(questions);
+
         if (questions.length === 0) {
           this.errorMessage = "Keine Fragen gefunden..."
           return;
         }
+
         this.questions = questions.sort((a, b) => 0.5 - Math.random());
       }).catch(err => {
         console.log(err);
@@ -156,6 +166,9 @@ export default defineComponent({
   watch: {
     chosenDropdownItem(item) {
       this.refetchQuestions();
+    },
+    currentQuestion(question) {
+      this.$store.commit('currentQuestion', question);
     }
   }
 })

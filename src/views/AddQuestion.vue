@@ -1,6 +1,21 @@
 <template>
   <Overlay :onClick="goHome"></Overlay>
   <Card>
+    <template v-slot:card-top-left>
+      <Dropdown
+          v-model:items="dropdownItems"
+          :blank="dropdownBlank"
+          multiple
+      ></Dropdown>
+    </template>
+    <template v-slot:card-top-right-btns>
+      <button
+          class="btn btn-small icon bg-gray-400 m-2"
+          @click="goHome"
+      >
+        <XIcon></XIcon>
+      </button>
+    </template>
     <template v-slot:card-text>
       <span
           class="text-gray-400"
@@ -16,7 +31,6 @@
       ></span>
     </template>
     <template v-slot:card-action>
-
       <button
           class="btn btn-gradient w-full"
           @click="addQuestion"
@@ -24,20 +38,6 @@
         <span>Speichern</span>
       </button>
     </template>
-
-    <div class="absolute top-3 left-4">
-      <Dropdown
-          v-model:items="dropdownItems"
-          :blank="dropdownBlank"
-          multiple
-      ></Dropdown>
-    </div>
-    <button
-        class="btn btn-small absolute top-8 right-8 bg-gray-400"
-        @click="goHome"
-    >
-      <XIcon></XIcon>
-    </button>
   </Card>
 </template>
 
@@ -54,6 +54,7 @@ import {Category} from "../entities/Category";
 export default defineComponent({
   name: "AddQuestion",
   components: {Card, Overlay, XIcon, Dropdown},
+  props: ["currentQuestion"],
   data: () => ({
     text: "",
     dropdownBlank: {

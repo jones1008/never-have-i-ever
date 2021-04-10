@@ -1,11 +1,13 @@
 import { createStore } from 'vuex'
+import Question from "./entities/Question";
 
 // Create a new store instance.
 export default createStore({
     state () {
         return {
             globalSuccess: null,
-            globalError: null
+            globalError: null,
+            currentQuestion: null
         }
     },
     mutations: {
@@ -16,6 +18,9 @@ export default createStore({
         globalError(state: any, value) {
             state.globalSuccess = null;
             state.globalError = value;
+        },
+        currentQuestion(state: any, value: Question) {
+            state.currentQuestion = value;
         }
     }
 })

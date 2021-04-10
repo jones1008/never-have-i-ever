@@ -1,13 +1,19 @@
 <template>
   <div class="card">
-    <div class="card-heading">
-      <slot name="card-heading"></slot>
-    </div>
     <div class="card-text">
       <slot name="card-text"></slot>
     </div>
     <div class="card-action">
       <slot name="card-action"></slot>
+    </div>
+    <div class="card-top">
+      <slot name="card-top"></slot>
+      <div class="card-top-right-btns">
+        <slot name="card-top-right-btns"></slot>
+      </div>
+      <div class="card-top-left">
+        <slot name="card-top-left"></slot>
+      </div>
     </div>
     <slot></slot>
   </div>
@@ -34,9 +40,17 @@ export default defineComponent({
   left: 50%;
   transform: translateX(-50%);
 
-  .card-heading {
-    @apply absolute p-6 top-0;
-    @apply font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl;
+  .card-top {
+    @apply absolute p-4 top-0;
+    width: 100%;
+    @apply flex justify-between;
+    .card-top-left {
+      @apply absolute left-2;
+    }
+    .card-top-right-btns {
+      @apply absolute right-2;
+      @apply flex place-items-center p-2;
+    }
   }
 
   .card-text {
