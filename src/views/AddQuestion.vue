@@ -3,7 +3,7 @@
   <Card>
     <template v-slot:card-top-left>
       <Dropdown
-          v-model:items="dropdownItems"
+          v-model:items="categories"
           :blank="dropdownBlank"
           multiple
       ></Dropdown>
@@ -49,47 +49,36 @@ import Card from "../components/Card.vue";
 import Dropdown from "../components/Dropdown.vue";
 import { XIcon } from '@heroicons/vue/solid'
 import Question from "../entities/Question";
-import { FireIcon, CakeIcon } from '@heroicons/vue/outline'
 import {Category} from "../entities/Category";
+import config from "../config";
+import {mapGetters} from "vuex";
+import clone from "../utils/clone";
 
 export default defineComponent({
   name: "AddQuestion",
   components: {Card, Overlay, XIcon, Dropdown},
-  props: ["currentQuestion"],
   data: () => ({
     text: "",
     dropdownBlank: {
       text: "Kategorien",
       iconColor: "text-gray-400"
     },
-    dropdownItems: [
-      {
-        text: "Hot",
-        value: "hot",
-        iconColor: "text-red-600",
-        isChosen: false,
-        icon: FireIcon
-      },
-      {
-        text: "Party",
-        value: "party",
-        iconColor: "text-purple-600",
-        isChosen: false,
-        icon: CakeIcon
-      }
-    ]
+    categories: clone.cloneArray(config.categories)
   }),
   mounted() {
     this.focusText();
   },
   computed: {
     chosenCategories(): Category[] {
-      let items = this.dropdownItems.filter(i => i.isChosen);
+      let items = this.categories.filter(i => i.isChosen);
       let categories: Category[] = [];
       for (let item of items) {
         categories.push(Category[item.value]);
       }
       return categories;
+    },
+    currentCategory: {
+      ...mapGetters({get: "currentCategory"})
     }
   },
   methods: {
@@ -112,7 +101,11 @@ export default defineComponent({
         question.categories = this.chosenCategories;
         question.save().then(() => {
           this.$store.commit("globalSuccess", "hinzugefügt")
-          // TODO: diese question den questions in Home.vue hinzufügen (store?)
+
+          // add to questions if category is currently being viewed
+          if (this.chosenCategories.includes(Category[this.currentCategory])) {
+            this.$store.commit("addToQuestions", question);
+          }
           return this.$router.push({name: "home"});
         }).catch(err => {
           this.$store.commit("globalError", "Fehler beim Hinzufügen")

@@ -1,7 +1,7 @@
 <template>
   <Card>
     <template v-slot:card-top-left>
-      <Dropdown v-model:items="dropdownItems"></Dropdown>
+      <Dropdown v-model:items="allCategories"></Dropdown>
     </template>
     <template v-slot:card-top-right-btns>
       <button
@@ -31,7 +31,10 @@
         Lädt Fragen...
       </p>
     </template>
-    <template v-slot:card-center>
+    <template
+        v-slot:card-center
+        v-if="currentQuestion && !errorMessage"
+    >
       <span class="absolute bottom-24 right-7 text-gray-400 text-sm font-bold">
         {{currentQuestionIndex+1}} / {{questions.length}}
       </span>
@@ -63,51 +66,23 @@ import {Category} from "../entities/Category";
 import ls from "../utils/localStorage";
 
 import { ChevronLeftIcon, PlusIcon, FlagIcon } from '@heroicons/vue/solid'
-import { FireIcon, CakeIcon, SparklesIcon } from '@heroicons/vue/outline'
+import {mapGetters, mapMutations, mapState} from "vuex";
+import config from "../config";
 
 const reportLimit = 3;
 
 export default defineComponent({
   name: 'Home',
-  components: {Dropdown, ChevronLeftIcon, PlusIcon, Card, SparklesIcon, FireIcon, CakeIcon, FlagIcon},
+  components: {Dropdown, ChevronLeftIcon, PlusIcon, Card, FlagIcon},
   async created() {
     this.refetchQuestions();
   },
   data: () => ({
-    questions: [] as Question[],
-    currentQuestionIndex: 0 as number,
-    // TODO: dropdownItems irgendwie auslagern, weil es bei AddQuestion auch verwendet wird
-    dropdownItems: [
-      {
-        text: "Alle",
-        value: "all",
-        iconColor: "text-yellow-600",
-        isChosen: false,
-        icon: SparklesIcon
-      },
-      {
-        text: "Hot",
-        value: Category[Category.hot],
-        iconColor: "text-red-600",
-        isChosen: false,
-        icon: FireIcon
-      },
-      {
-        text: "Party",
-        value: Category[Category.party],
-        iconColor: "text-purple-600",
-        isChosen: true,
-        icon: CakeIcon
-      }
-    ],
     errorMessage: null
   }),
   computed: {
-    currentQuestion() : Question|null {
-      if (this.questions.length > 0) {
-        return this.questions[this.currentQuestionIndex];
-      }
-      return null;
+    currentQuestion: {
+      ...mapGetters({get: "currentQuestion"})
     },
     isLastQuestion(): boolean {
       return this.currentQuestionIndex === this.questions.length - 1;
@@ -115,11 +90,20 @@ export default defineComponent({
     isFirstQuestion(): boolean {
       return this.currentQuestionIndex === 0;
     },
-    chosenDropdownItem() {
-      return this.dropdownItems.find(i => i.isChosen);
+    questions: {
+      ...mapState({ get: 'questions' }),
+      ...mapMutations({set: 'questions'})
     },
-    chosenCategory() {
-      return this.chosenDropdownItem.value;
+    currentQuestionIndex: {
+      ...mapState({get: 'currentQuestionIndex'}),
+      ...mapMutations({set: 'currentQuestionIndex'})
+    },
+    allCategories: {
+      ...mapState({get: 'allCategories'}),
+      ...mapMutations({set: 'allCategories'})
+    },
+    currentCategory: {
+      ...mapGetters({get: 'currentCategory'})
     }
   },
   methods: {
@@ -132,10 +116,6 @@ export default defineComponent({
       }
       let categoryObj: Category = Category[category];
       return Question.find("categories", "array-contains", categoryObj);
-    },
-    filterReported(questions: Array<Question>): Array<Question> {
-      let reportedQuestions = ls.getArray("reportedQuestionIds");
-      return questions.filter(q => !reportedQuestions.includes(q.id));
     },
     nextQuestion(): void {
       if (this.isLastQuestion) {
@@ -151,9 +131,10 @@ export default defineComponent({
         this.currentQuestionIndex--;
       }
     },
+
     refetchQuestions() {
       this.errorMessage = null;
-      this.getQuestions(this.chosenCategory).then(questions => {
+      this.getQuestions(this.currentCategory).then(questions => {
         questions = this.filterReported(questions);
 
         if (questions.length === 0) {
@@ -166,14 +147,15 @@ export default defineComponent({
         console.log(err);
         this.$store.commit("globalError", "Fehler beim Laden der Fragen");
       });
-    }
+    },
+    filterReported(questions: Array<Question>): Array<Question> {
+      let reportedQuestions = ls.getArray("reportedQuestionIds");
+      return questions.filter(q => !reportedQuestions.includes(q.id));
+    },
   },
   watch: {
-    chosenDropdownItem(item) {
+    currentCategory(item) {
       this.refetchQuestions();
-    },
-    currentQuestion(question) {
-      this.$store.commit('currentQuestion', question);
     }
   }
 })
