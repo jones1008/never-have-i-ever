@@ -28,6 +28,7 @@
           contenteditable="true"
           ref="text"
           @input="onInput"
+          autocapitalize="none"
       ></span>
     </template>
     <template v-slot:card-action>
@@ -104,18 +105,26 @@ export default defineComponent({
         return;
       }
       if (this.text) {
-        let text = this.text.trim().replace(/^ich hab*. noch nie/i, '').trim();
         let question: Question = new Question();
-        question.text = text;
+        question.text = this.optimizeQuestion(this.text);
+        // TODO: überprüfen, ob es diese Frage bereits gibt oder ähnlich: Levensthein Distance, Fuzzy Hashing?
         question.reports = 0;
         question.categories = this.chosenCategories;
         question.save().then(() => {
           this.$store.commit("globalSuccess", "hinzugefügt")
+          // TODO: diese question den questions in Home.vue hinzufügen (store?)
           return this.$router.push({name: "home"});
         }).catch(err => {
           this.$store.commit("globalError", "Fehler beim Hinzufügen")
         });
       }
+    },
+    optimizeQuestion(text: string): string {
+      text = text.trim().replace(/^ich hab*. noch nie/i, '').trim();
+      if (text.substr(-1) !== ".") {
+        text = text + ".";
+      }
+      return text;
     },
     goHome() {
       this.$router.push({name: 'home'})

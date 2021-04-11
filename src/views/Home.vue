@@ -77,7 +77,7 @@ export default defineComponent({
         text: "Alle",
         value: "all",
         iconColor: "text-yellow-600",
-        isChosen: true,
+        isChosen: false,
         icon: SparklesIcon
       },
       {
@@ -91,7 +91,7 @@ export default defineComponent({
         text: "Party",
         value: Category[Category.party],
         iconColor: "text-purple-600",
-        isChosen: false,
+        isChosen: true,
         icon: CakeIcon
       }
     ],
