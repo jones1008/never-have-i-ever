@@ -36,6 +36,7 @@ import Overlay from "../components/Overlay.vue";
 import Card from "../components/Card.vue";
 import {XIcon} from '@heroicons/vue/solid';
 import ls from "../utils/localStorage";
+import {mapGetters, mapMutations} from "vuex";
 
 export default defineComponent({
   name: "ReportQuestion",
@@ -47,6 +48,7 @@ export default defineComponent({
         this.currentQuestion.save().then(() => {
           ls.addToArray("reportedQuestionIds", this.currentQuestion.id);
           this.$store.commit("globalSuccess", "Frage wurde gemeldet.");
+          // TODO: direkt lokal rauswerfen
           this.goHome();
         }).catch(() => {
           this.$store.commit("globalError", "Fehler beim Melden");
@@ -61,12 +63,8 @@ export default defineComponent({
   },
   computed: {
     currentQuestion: {
-      get() {
-        return this.$store.state.currentQuestion;
-      },
-      set(value) {
-        this.$store.commit('currentQuestion', value);
-      }
+      ...mapGetters({get: "currentQuestion"}),
+      ...mapMutations({set: "setQuestion"})
     }
   }
 });

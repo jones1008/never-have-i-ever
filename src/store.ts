@@ -44,6 +44,12 @@ export default createStore({
         questions(state: any, value) {
             state.questions = value;
         },
+        setQuestion(state: any, question: Question) {
+            let foundQuestion = state.questions.find(q => q.id === question.id);
+            if (foundQuestion) {
+                foundQuestion = question;
+            }
+        },
         addToQuestions(state: any, question: Question) {
             state.questions.push(question);
         },
