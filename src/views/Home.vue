@@ -31,6 +31,11 @@
         Lädt Fragen...
       </p>
     </template>
+    <template v-slot:card-center>
+      <span class="absolute bottom-24 right-7 text-gray-400 text-sm font-bold">
+        {{currentQuestionIndex+1}} / {{questions.length}}
+      </span>
+    </template>
     <template v-slot:card-action>
       <button
           class="btn icon bg-gray-400"

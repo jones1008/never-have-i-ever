@@ -1,7 +1,10 @@
 <template>
   <div class="card">
-    <div class="card-text">
-      <slot name="card-text"></slot>
+    <div class="card-center">
+      <slot name="card-center"></slot>
+      <div class="card-text">
+        <slot name="card-text"></slot>
+      </div>
     </div>
     <div class="card-action">
       <slot name="card-action"></slot>
@@ -29,9 +32,11 @@ export default defineComponent({
 
 <style scoped lang="scss">
 
+$card-height: 75vh;
+
 .card {
   @apply w-full mx-auto absolute;
-  min-height: 75vh;
+  min-height: $card-height;
   max-width: 1200px;
   @apply flex justify-center items-center flex-col;
   @apply shadow-2xl;
@@ -53,13 +58,17 @@ export default defineComponent({
     }
   }
 
-  .card-text {
-    @apply w-5/6;
-    @apply px-2 sm:px-0;
-    @apply font-extrabold text-2xl sm:text-3xl md:text-4xl lg:text-5xl;
-    @apply leading-snug;
-    position: relative;
-    top: -2rem;
+  .card-center {
+    min-height: $card-height;
+    @apply w-full flex justify-center items-center;
+
+    .card-text {
+      @apply w-5/6;
+      @apply px-2 sm:px-0;
+      @apply font-extrabold text-2xl sm:text-3xl md:text-4xl lg:text-5xl;
+      @apply leading-snug;
+      @apply relative -top-4;
+    }
   }
 
   .card-action {
