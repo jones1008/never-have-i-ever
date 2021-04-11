@@ -2,7 +2,7 @@ import {BaseModel, Field, Model} from "@arbel/firebase-orm";
 import {Category} from "./Category";
 
 @Model({
-    reference_path: "questions",
+    reference_path: process.env.NODE_ENV === 'production' ? "questions" : "questions-test",
     path_id: "question_id"
 })
 export default class Question extends BaseModel {
