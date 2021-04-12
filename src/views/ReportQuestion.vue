@@ -37,6 +37,7 @@ import Card from "../components/Card.vue";
 import {XIcon} from '@heroicons/vue/solid';
 import ls from "../utils/localStorage";
 import {mapGetters, mapMutations} from "vuex";
+import Question from "../entities/Question";
 
 export default defineComponent({
   name: "ReportQuestion",
@@ -47,14 +48,22 @@ export default defineComponent({
         this.currentQuestion.data.reports++;
         this.currentQuestion.save().then(() => {
           ls.addToArray("reportedQuestionIds", this.currentQuestion.id);
+          this.removeQuestion(this.currentQuestion);
           this.$store.commit("globalSuccess", "Frage wurde gemeldet.");
-          // TODO: direkt lokal rauswerfen
           this.goHome();
-        }).catch(() => {
+        }).catch(err => {
+          console.log(err);
           this.$store.commit("globalError", "Fehler beim Melden");
         });
       } else {
         this.$store.commit("globalError", "Hast du bereits gemeldet");
+      }
+    },
+    removeQuestion(question: Question) {
+      this.$store.commit("removeQuestion", question);
+      if (!this.$store.getters.isFirstQuestion) {
+        this.$store.commit("currentQuestionIndex", --this.$store.state.currentQuestionIndex);
+        this.$store.dispatch("nextQuestion");
       }
     },
     goHome() {

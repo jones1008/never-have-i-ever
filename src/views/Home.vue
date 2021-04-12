@@ -66,10 +66,8 @@ import {Category} from "../entities/Category";
 import ls from "../utils/localStorage";
 
 import { ChevronLeftIcon, PlusIcon, FlagIcon } from '@heroicons/vue/solid'
-import {mapGetters, mapMutations, mapState} from "vuex";
+import {mapActions, mapGetters, mapMutations, mapState} from "vuex";
 import config from "../config";
-
-const reportLimit = 3;
 
 export default defineComponent({
   name: 'Home',
@@ -83,12 +81,6 @@ export default defineComponent({
   computed: {
     currentQuestion: {
       ...mapGetters({get: "currentQuestion"})
-    },
-    isLastQuestion(): boolean {
-      return this.currentQuestionIndex === this.questions.length - 1;
-    },
-    isFirstQuestion(): boolean {
-      return this.currentQuestionIndex === 0;
     },
     questions: {
       ...mapState({ get: 'questions' }),
@@ -108,29 +100,19 @@ export default defineComponent({
   },
   methods: {
     async getAllQuestions(): Promise<Array<Question>> {
-      return Question.query().where("reports", "<", reportLimit).get();
+      return this.reportLimitQuery().get();
     },
     async getQuestions(category: String = "all"): Promise<Array<Question>> {
       if (category == "all") {
         return this.getAllQuestions();
       }
       let categoryObj: Category = Category[category];
-      return Question.find("categories", "array-contains", categoryObj);
+      return this.reportLimitQuery().where("categories", "array-contains", categoryObj).get();
     },
-    nextQuestion(): void {
-      if (this.isLastQuestion) {
-        this.currentQuestionIndex = 0;
-      } else {
-        this.currentQuestionIndex++;
-      }
+    reportLimitQuery() {
+      return Question.query().where("reports", "<", config.reportLimit);
     },
-    prevQuestion(): void {
-      if (this.isFirstQuestion) {
-        this.currentQuestionIndex = this.questions.length - 1;
-      } else {
-        this.currentQuestionIndex--;
-      }
-    },
+    ...mapActions(["nextQuestion", "prevQuestion"]),
 
     refetchQuestions() {
       this.errorMessage = null;

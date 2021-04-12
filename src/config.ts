@@ -18,5 +18,6 @@ export default {
             icon: CakeIcon
         }
     ],
-    defaultCategory: Category[Category.party]
+    defaultCategory: Category[Category.party],
+    reportLimit: 3
 }

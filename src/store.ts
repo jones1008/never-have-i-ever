@@ -50,6 +50,12 @@ export default createStore({
                 foundQuestion = question;
             }
         },
+        removeQuestion(state: any, question: Question) {
+            let foundQuestionIndex = state.questions.findIndex(q => q.id === question.id);
+            if (foundQuestionIndex !== -1) {
+                state.questions.splice(foundQuestionIndex, 1);
+            }
+        },
         addToQuestions(state: any, question: Question) {
             state.questions.push(question);
         },
@@ -58,7 +64,7 @@ export default createStore({
         },
         allCategories(state: any, value) {
             state.allCategores = value;
-        }
+        },
     },
     getters: {
         currentQuestion(state, getters): Question | null {
@@ -73,6 +79,28 @@ export default createStore({
                 return chosenCategoryObj.value;
             }
             return null;
+        },
+        isLastQuestion(state, getters): boolean {
+            return state.currentQuestionIndex >= state.questions.length - 1;
+        },
+        isFirstQuestion(state, getters): boolean {
+            return state.currentQuestionIndex === 0;
+        },
+    },
+    actions: {
+        nextQuestion(context) {
+            if (context.getters.isLastQuestion) {
+                context.commit("currentQuestionIndex", 0);
+            } else {
+                context.commit("currentQuestionIndex", ++context.state.currentQuestionIndex);
+            }
+        },
+        prevQuestion(context) {
+            if (context.getters.isFirstQuestion) {
+                context.commit("currentQuestionIndex", context.state.questions.length - 1);
+            } else {
+                context.commit("currentQuestionIndex", --context.state.currentQuestionIndex);
+            }
         }
     }
 })

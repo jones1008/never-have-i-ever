@@ -107,6 +107,7 @@ export default defineComponent({
       }
     },
     close() {
+      // TODO: is executed at every click
       console.log("closing");
       this.isOpen = false;
     }
