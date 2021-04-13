@@ -42,8 +42,6 @@ $card-height: 75vh;
   @apply shadow-2xl;
   border-radius: 2.5rem;
   @apply bg-white;
-  left: 50%;
-  transform: translateX(-50%);
 
   .card-top {
     @apply absolute p-4 top-0;

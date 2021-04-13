@@ -69,7 +69,7 @@ export default defineComponent({
 }
 
 .centerer {
-  @apply relative container mx-auto justify-center items-center h-full;
+  @apply flex justify-center container mx-auto h-full;
   height: 85vh;
 }
 

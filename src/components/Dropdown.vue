@@ -1,7 +1,12 @@
 <template>
+  <Overlay
+      :onClick="close"
+      :transparent="true"
+      v-if="isOpen"
+  ></Overlay>
+
   <div
       :class="['dropdown', {isOpen: isOpen}]"
-      v-click-outside="close"
   >
     <div
         v-if="blank || blank && isOpen"
@@ -41,6 +46,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { ChevronDownIcon, CheckIcon} from '@heroicons/vue/outline'
+import Overlay from '../components/Overlay.vue';
 
 export default defineComponent({
   name: "Dropdown",
@@ -64,7 +70,7 @@ export default defineComponent({
       default: false
     }
   },
-  components: {ChevronDownIcon, CheckIcon},
+  components: {ChevronDownIcon, CheckIcon, Overlay},
   data: () => ({
     isOpen: false as boolean,
   }),
@@ -107,8 +113,6 @@ export default defineComponent({
       }
     },
     close() {
-      // TODO: is executed at every click
-      console.log("closing");
       this.isOpen = false;
     }
   }
@@ -117,7 +121,7 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .dropdown {
-  @apply p-4;
+  @apply relative p-4;
   @apply text-2xl font-extrabold text-left;
   @apply cursor-pointer select-none;
 

@@ -14,10 +14,7 @@ FirestoreOrmRepository.initGlobalConnection(connection);
 
 import store from './store';
 
-import clickOutside from './directives/click-outside';
-
 createApp(App)
-    .directive('click-outside', clickOutside)
     .use(router)
     .use(store)
     .mount('#app');
