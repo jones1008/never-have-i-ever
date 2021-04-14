@@ -34,7 +34,7 @@
     <template v-slot:card-action>
       <button
           class="btn btn-gradient w-full"
-          @click="addQuestion"
+          @click="add"
       >
         <span>Speichern</span>
       </button>
@@ -48,22 +48,26 @@ import Overlay from "../components/Overlay.vue";
 import Card from "../components/Card.vue";
 import Dropdown from "../components/Dropdown.vue";
 import { XIcon } from '@heroicons/vue/solid'
-import Question from "../entities/Question";
-import {Category} from "../entities/Category";
+import {Category} from "../category/Category";
 import config from "../config";
 import {mapGetters} from "vuex";
 import clone from "../utils/clone";
+import CategoryObject from "../category/CategoryObject";
+import addQuestion from "../mixins/addQuestion";
+import {CategoryType} from "../category/CategoryType";
+import CategoryObjectBase from "../category/CategoryObjectBase";
 
 export default defineComponent({
   name: "AddQuestion",
   components: {Card, Overlay, XIcon, Dropdown},
+  mixins: [addQuestion],
   data: () => ({
-    text: "",
+    text: "" as string,
     dropdownBlank: {
       text: "Kategorien",
       iconColor: "text-gray-400"
-    },
-    categories: clone.cloneArray(config.categories)
+    } as CategoryObjectBase,
+    categories: clone.cloneArray(config.categories) as CategoryObject[]
   }),
   mounted() {
     this.focusText();
@@ -71,55 +75,29 @@ export default defineComponent({
   computed: {
     chosenCategories(): Category[] {
       let items = this.categories.filter(i => i.isChosen);
-      let categories: Category[] = [];
+      let categories: CategoryType[] = [];
       for (let item of items) {
-        categories.push(Category[item.value]);
+        categories.push(item.value);
       }
       return categories;
     },
     currentCategory: {
       ...mapGetters({get: "currentCategory"})
-    }
+    } as CategoryType
   },
   methods: {
-    onInput(e: Event) {
+    onInput(e: Event): void {
       this.text = e.target.innerText;
     },
-    focusText() {
+    focusText(): void {
       this.$refs.text.focus();
     },
-    async addQuestion(): void {
-      if (this.chosenCategories.length === 0) {
-        this.$store.commit("globalError", "Kategorie wählen")
-        return;
-      }
-      if (this.text) {
-        let question: Question = new Question();
-        question.text = this.optimizeQuestion(this.text);
-        // TODO: überprüfen, ob es diese Frage bereits gibt oder ähnlich: Levensthein Distance, Fuzzy Hashing?
-        question.reports = 0;
-        question.categories = this.chosenCategories;
-        question.save().then(() => {
-          this.$store.commit("globalSuccess", "hinzugefügt")
-
-          // add to questions if category is currently being viewed
-          if (this.chosenCategories.includes(Category[this.currentCategory])) {
-            this.$store.commit("addToQuestions", question);
-          }
-          return this.$router.push({name: "home"});
-        }).catch(err => {
-          this.$store.commit("globalError", "Fehler beim Hinzufügen")
-        });
-      }
+    add(): void {
+      this.addQuestion(this.text, this.chosenCategories, this.currentCategory).then(() => {
+          this.goHome()
+      });
     },
-    optimizeQuestion(text: string): string {
-      text = text.trim().replace(/^ich hab*. noch nie/i, '').trim();
-      if (text.substr(-1) !== ".") {
-        text = text + ".";
-      }
-      return text;
-    },
-    goHome() {
+    goHome(): void {
       this.$router.push({name: 'home'})
     }
   }

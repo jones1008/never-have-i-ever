@@ -59,85 +59,58 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Question from "../entities/Question";
 import Card from "../components/Card.vue";
 import Dropdown from "../components/Dropdown.vue";
-import {Category} from "../entities/Category";
-import ls from "../utils/localStorage";
 
 import { ChevronLeftIcon, PlusIcon, FlagIcon } from '@heroicons/vue/solid'
 import {mapActions, mapGetters, mapMutations, mapState} from "vuex";
-import config from "../config";
+import fetchQuestions from "../mixins/fetchQuestions";
+import Question from "../question/Question";
+import CategoryObject from "../category/CategoryObject";
+import {CategoryType} from "../category/CategoryType";
 
 export default defineComponent({
   name: 'Home',
   components: {Dropdown, ChevronLeftIcon, PlusIcon, Card, FlagIcon},
+  mixins: [fetchQuestions],
   async created() {
-    this.refetchQuestions();
+    this.fetch();
   },
   data: () => ({
-    errorMessage: null
+    errorMessage: "" as string
   }),
   computed: {
     currentQuestion: {
       ...mapGetters({get: "currentQuestion"})
-    },
+    } as Question,
     questions: {
       ...mapState({ get: 'questions' }),
       ...mapMutations({set: 'questions'})
-    },
+    } as Question[],
     currentQuestionIndex: {
       ...mapState({get: 'currentQuestionIndex'}),
       ...mapMutations({set: 'currentQuestionIndex'})
-    },
+    } as number,
     allCategories: {
       ...mapState({get: 'allCategories'}),
       ...mapMutations({set: 'allCategories'})
-    },
+    } as CategoryObject[],
     currentCategory: {
       ...mapGetters({get: 'currentCategory'})
-    }
+    } as CategoryType
   },
   methods: {
-    async getAllQuestions(): Promise<Array<Question>> {
-      return this.reportLimitQuery().get();
-    },
-    async getQuestions(category: String = "all"): Promise<Array<Question>> {
-      if (category == "all") {
-        return this.getAllQuestions();
+    async fetch(): void {
+      this.questions = await this.fetchQuestions(this.currentCategory);
+      if (!this.questions || this.questions.length === 0) {
+        this.errorMessage = "Keine Fragen gefunden..."
       }
-      let categoryObj: Category = Category[category];
-      return this.reportLimitQuery().where("categories", "array-contains", categoryObj).get();
-    },
-    reportLimitQuery() {
-      return Question.query().where("reports", "<", config.reportLimit);
     },
     ...mapActions(["nextQuestion", "prevQuestion"]),
-
-    refetchQuestions() {
-      this.errorMessage = null;
-      this.getQuestions(this.currentCategory).then(questions => {
-        questions = this.filterReported(questions);
-
-        if (questions.length === 0) {
-          this.errorMessage = "Keine Fragen gefunden..."
-          return;
-        }
-
-        this.questions = questions.sort((a, b) => 0.5 - Math.random());
-      }).catch(err => {
-        console.log(err);
-        this.$store.commit("globalError", "Fehler beim Laden der Fragen");
-      });
-    },
-    filterReported(questions: Array<Question>): Array<Question> {
-      let reportedQuestions = ls.getArray("reportedQuestionIds");
-      return questions.filter(q => !reportedQuestions.includes(q.id));
-    },
   },
   watch: {
-    currentCategory(item) {
-      this.refetchQuestions();
+    currentCategory(item): void {
+      this.fetch();
     }
   }
 })

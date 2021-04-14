@@ -1,4 +1,7 @@
-const prefix = "NeverHaveIEver-";
+let prefix = "NeverHaveIEver-";
+if (process.env.NODE_ENV === 'development') {
+    prefix += "test-";
+}
 
 export default {
     getArray(name: String): Array<any> {

@@ -32,7 +32,7 @@ export default defineComponent({
 
 <style scoped lang="scss">
 
-$card-height: 75vh;
+$card-height: 80vh;
 
 .card {
   @apply w-full mx-auto absolute;

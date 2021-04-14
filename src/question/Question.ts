@@ -1,5 +1,5 @@
 import {BaseModel, Field, Model} from "@arbel/firebase-orm";
-import {Category} from "./Category";
+import {Category} from "../category/Category";
 
 @Model({
     reference_path: process.env.NODE_ENV === 'production' ? "questions" : "questions-test",

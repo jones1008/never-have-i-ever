@@ -1,9 +1,10 @@
 import { createStore } from 'vuex'
-import Question from "./entities/Question";
-import {Category} from "./entities/Category";
+import Question from "./question/Question";
 import {SparklesIcon} from '@heroicons/vue/outline';
 import config from "./config";
 import clone from "./utils/clone";
+import CategoryObject from "./category/CategoryObject";
+import {CategoryType} from "./category/CategoryType";
 
 // Create a new store instance.
 export default createStore({
@@ -17,7 +18,7 @@ export default createStore({
                 iconColor: "text-yellow-600",
                 isChosen: false,
                 icon: SparklesIcon
-            },
+            } as CategoryObject,
             ...categories
         ];
         let defaultCategory = allCategories.find(c => c.value === config.defaultCategory);
@@ -29,7 +30,7 @@ export default createStore({
             globalError: null,
             questions: [] as Question[],
             currentQuestionIndex: 0 as number,
-            allCategories
+            allCategories: allCategories as CategoryObject[]
         }
     },
     mutations: {
@@ -73,12 +74,12 @@ export default createStore({
             }
             return null;
         },
-        currentCategory(state, getters): Category | null {
+        currentCategory(state, getters): CategoryType {
             let chosenCategoryObj = state.allCategories.find(i => i.isChosen);
             if (chosenCategoryObj) {
                 return chosenCategoryObj.value;
             }
-            return null;
+            return "all"
         },
         isLastQuestion(state, getters): boolean {
             return state.currentQuestionIndex >= state.questions.length - 1;

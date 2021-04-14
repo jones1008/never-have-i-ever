@@ -1,23 +1,24 @@
-import {Category} from "./entities/Category";
+import {Category} from "./category/Category";
 import { FireIcon, CakeIcon } from '@heroicons/vue/outline'
+import CategoryObject from "./category/CategoryObject";
 
 export default {
     categories: [
         {
             text: "Hot",
-            value: Category[Category.hot],
+            value: Category.hot,
             iconColor: "text-red-600",
             isChosen: false,
             icon: FireIcon
-        },
+        } as CategoryObject,
         {
             text: "Party",
-            value: Category[Category.party],
+            value: Category.party,
             iconColor: "text-purple-600",
             isChosen: false,
             icon: CakeIcon
-        }
+        } as CategoryObject
     ],
-    defaultCategory: Category[Category.party],
+    defaultCategory: Category.party,
     reportLimit: 3
 }

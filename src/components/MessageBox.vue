@@ -34,17 +34,16 @@ export default defineComponent({
   },
   components: {XIcon},
   data: () => ({
-    // active: false,
     timeoutInstance: null
   }),
   created() {
     this.startTimeout();
   },
   methods: {
-    close() {
+    close(): void {
       this.$emit('update:message', null);
     },
-    startTimeout() {
+    startTimeout(): void {
       if (this.timeout !== -1 && this.message) {
         // hack for overlapping timeouts
         let instance = this.timeoutInstance = setTimeout(() => {
@@ -56,7 +55,7 @@ export default defineComponent({
     }
   },
   watch: {
-    message() {
+    message(): void {
       this.startTimeout();
     }
   }

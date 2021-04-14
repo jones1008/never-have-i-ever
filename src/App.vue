@@ -21,26 +21,19 @@
 <script lang="ts">
 import {defineComponent} from "vue";
 import MessageBox from './components/MessageBox.vue';
+import {mapMutations, mapState} from "vuex";
 
 export default defineComponent({
   name: 'App',
   components: {MessageBox},
   computed: {
     globalError: {
-      get() {
-        return this.$store.state.globalError;
-      },
-      set(value) {
-        this.$store.commit("globalError", value)
-      }
+      ...mapState({get: "globalError"}),
+      ...mapMutations({set: "globalError"})
     },
     globalSuccess: {
-      get() {
-        return this.$store.state.globalSuccess;
-      },
-      set(value) {
-        this.$store.commit("globalSuccess", value)
-      }
+      ...mapState({get: "globalSuccess"}),
+      ...mapMutations({set: "globalSuccess"})
     }
   }
 })

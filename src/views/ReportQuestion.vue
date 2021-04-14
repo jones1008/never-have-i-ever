@@ -21,7 +21,7 @@
     </template>
     <template v-slot:card-action>
       <button
-          @click="reportQuestion"
+          @click="report"
           class="btn btn-gradient w-full"
       >
         <span>Ja, weg damit!</span>
@@ -35,45 +35,27 @@ import {defineComponent} from "vue";
 import Overlay from "../components/Overlay.vue";
 import Card from "../components/Card.vue";
 import {XIcon} from '@heroicons/vue/solid';
-import ls from "../utils/localStorage";
 import {mapGetters, mapMutations} from "vuex";
-import Question from "../entities/Question";
+import reportQuestion from "../mixins/reportQuestion";
 
 export default defineComponent({
   name: "ReportQuestion",
   components: {Card, Overlay, XIcon},
-  methods: {
-    reportQuestion() {
-      if (!ls.getArray("reportedQuestionIds").includes(this.currentQuestion.id)) {
-        this.currentQuestion.data.reports++;
-        this.currentQuestion.save().then(() => {
-          ls.addToArray("reportedQuestionIds", this.currentQuestion.id);
-          this.removeQuestion(this.currentQuestion);
-          this.$store.commit("globalSuccess", "Frage wurde gemeldet.");
-          this.goHome();
-        }).catch(err => {
-          console.log(err);
-          this.$store.commit("globalError", "Fehler beim Melden");
-        });
-      } else {
-        this.$store.commit("globalError", "Hast du bereits gemeldet");
-      }
-    },
-    removeQuestion(question: Question) {
-      this.$store.commit("removeQuestion", question);
-      if (!this.$store.getters.isFirstQuestion) {
-        this.$store.commit("currentQuestionIndex", --this.$store.state.currentQuestionIndex);
-        this.$store.dispatch("nextQuestion");
-      }
-    },
-    goHome() {
-      this.$router.push({name: 'home'})
-    }
-  },
+  mixins: [reportQuestion],
   computed: {
     currentQuestion: {
       ...mapGetters({get: "currentQuestion"}),
       ...mapMutations({set: "setQuestion"})
+    }
+  },
+  methods: {
+    report(): void {
+      this.reportQuestion(this.currentQuestion).then(() => {
+        this.goHome()
+      });
+    },
+    goHome(): void {
+      this.$router.push({name: 'home'})
     }
   }
 });
