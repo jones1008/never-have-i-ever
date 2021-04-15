@@ -4,7 +4,6 @@
       :transparent="true"
       v-if="isOpen"
   ></Overlay>
-
   <div
       :class="['dropdown', {isOpen: isOpen}]"
   >
@@ -47,7 +46,6 @@
 import { defineComponent } from 'vue'
 import { ChevronDownIcon, CheckIcon} from '@heroicons/vue/outline'
 import Overlay from '../components/Overlay.vue';
-
 export default defineComponent({
   name: "Dropdown",
   props: {
@@ -118,13 +116,11 @@ export default defineComponent({
   }
 });
 </script>
-
 <style scoped lang="scss">
 .dropdown {
   @apply relative p-4;
   @apply text-2xl font-extrabold text-left;
   @apply cursor-pointer select-none;
-
   .item {
     @apply flex;
     @apply items-center py-2;
@@ -145,11 +141,9 @@ export default defineComponent({
       @apply inline h-5 w-5;
     }
   }
-
   &.isOpen {
     @apply rounded-3xl bg-white shadow-2xl;
     .item {
-      //@apply flex;
       &.isChosen {
         @apply text-black;
       }

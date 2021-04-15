@@ -10,15 +10,18 @@ export default {
         async getAllQuestions(): Promise<Question[]> {
             return this.reportLimitQuery().get();
         },
+
         async getQuestions(category: CategoryType): Promise<Question[]> {
             if (category == "all") {
                 return this.getAllQuestions();
             }
             return this.reportLimitQuery().where("categories", "array-contains", category).get();
         },
+
         reportLimitQuery(): Query<any> {
             return Question.query().where("reports", "<", config.reportLimit);
         },
+
         fetchQuestions(category: CategoryType): Promise<Question[]> {
             return new Promise((resolve) => {
                 return this.getQuestions(category).then(questions => {
@@ -35,6 +38,7 @@ export default {
                 });
             });
         },
+
         filterReported(questions: Question[]): Question[] {
             let reportedQuestions: Array<string> = ls.getArray("reportedQuestionIds");
             return questions.filter(q => !reportedQuestions.includes(q.id));

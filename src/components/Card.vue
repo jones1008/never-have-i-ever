@@ -21,19 +21,14 @@
     <slot></slot>
   </div>
 </template>
-
 <script lang="ts">
 import {defineComponent} from "vue";
-
 export default defineComponent({
   name: "Card"
 });
 </script>
-
 <style scoped lang="scss">
-
 $card-height: 80vh;
-
 .card {
   @apply w-full mx-auto absolute;
   min-height: $card-height;
@@ -42,7 +37,6 @@ $card-height: 80vh;
   @apply shadow-2xl;
   border-radius: 2.5rem;
   @apply bg-white;
-
   .card-top {
     @apply absolute p-4 top-0;
     width: 100%;
@@ -55,11 +49,9 @@ $card-height: 80vh;
       @apply flex place-items-center p-2;
     }
   }
-
   .card-center {
     min-height: $card-height;
     @apply w-full flex justify-center items-center;
-
     .card-text {
       @apply w-5/6;
       @apply px-2 sm:px-0;
@@ -68,7 +60,6 @@ $card-height: 80vh;
       @apply relative -top-4;
     }
   }
-
   .card-action {
     @apply absolute p-4 bottom-0;
     width: 100%;

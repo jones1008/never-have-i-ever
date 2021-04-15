@@ -24,6 +24,7 @@ export default {
                 }
             });
         },
+
         removeQuestion(question: Question): void {
             store.commit("removeQuestion", question);
             if (!store.getters.isFirstQuestion) {

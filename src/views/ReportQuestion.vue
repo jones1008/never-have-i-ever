@@ -29,7 +29,6 @@
     </template>
   </Card>
 </template>
-
 <script lang="ts">
 import {defineComponent} from "vue";
 import Overlay from "../components/Overlay.vue";
@@ -37,7 +36,6 @@ import Card from "../components/Card.vue";
 import {XIcon} from '@heroicons/vue/solid';
 import {mapGetters, mapMutations} from "vuex";
 import reportQuestion from "../mixins/reportQuestion";
-
 export default defineComponent({
   name: "ReportQuestion",
   components: {Card, Overlay, XIcon},
@@ -60,7 +58,3 @@ export default defineComponent({
   }
 });
 </script>
-
-<style scoped>
-
-</style>

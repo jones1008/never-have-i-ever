@@ -4,10 +4,8 @@
       @click="onClick"
   ></div>
 </template>
-
 <script lang="ts">
 import {defineComponent} from "vue";
-
 export default defineComponent({
   name: "Overlay",
   props: {
@@ -19,7 +17,6 @@ export default defineComponent({
   }
 });
 </script>
-
 <style scoped lang="scss">
 .overlay {
   @apply fixed top-0 left-0 w-full h-full;

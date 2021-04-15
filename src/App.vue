@@ -17,12 +17,10 @@
       :timeout="5000"
   ></MessageBox>
 </template>
-
 <script lang="ts">
 import {defineComponent} from "vue";
 import MessageBox from './components/MessageBox.vue';
 import {mapMutations, mapState} from "vuex";
-
 export default defineComponent({
   name: 'App',
   components: {MessageBox},
@@ -38,18 +36,15 @@ export default defineComponent({
   }
 })
 </script>
-
 <style lang="scss">
 #app {
   @apply text-center;
 }
-
 .caption {
   @apply font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white;
   @apply flex items-center justify-center;
   height: 15vh;
 }
-
 .wave {
   @apply absolute top-0;
   width: 100%;
@@ -60,12 +55,10 @@ export default defineComponent({
   border-bottom-right-radius: 4rem;
   border-bottom-left-radius: 4rem;
 }
-
 .centerer {
   @apply flex justify-center container mx-auto h-full;
   height: 85vh;
 }
-
 .btn {
   @apply p-3 relative;
   @apply text-2xl text-white font-bold;

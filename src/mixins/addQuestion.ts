@@ -3,9 +3,6 @@ import {Category} from "../category/Category";
 import store from "../store";
 
 export default {
-    computed: {
-
-    },
     methods: {
         async addQuestion(text: string, categories: Category[], currentCategory: Category): Promise<Question> {
             return new Promise((resolve, reject) => {
@@ -36,6 +33,7 @@ export default {
                 }
             });
         },
+
         optimizeQuestion(text: string): string {
             text = text.trim().replace(/^ich hab*. noch nie/i, '').trim();
             if (text.substr(-1) !== ".") {

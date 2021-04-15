@@ -11,9 +11,11 @@ export default {
         }
         return [];
     },
+
     setArray(name: String, array: Array<any>) {
         localStorage.setItem(prefix + name, JSON.stringify(array));
     },
+
     addToArray(name: String, value: any) {
         let array = this.getArray(name);
         array.push(value);

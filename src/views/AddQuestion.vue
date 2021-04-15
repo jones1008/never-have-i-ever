@@ -41,7 +41,6 @@
     </template>
   </Card>
 </template>
-
 <script lang="ts">
 import {defineComponent} from "vue";
 import Overlay from "../components/Overlay.vue";
@@ -56,7 +55,6 @@ import CategoryObject from "../category/CategoryObject";
 import addQuestion from "../mixins/addQuestion";
 import {CategoryType} from "../category/CategoryType";
 import CategoryObjectBase from "../category/CategoryObjectBase";
-
 export default defineComponent({
   name: "AddQuestion",
   components: {Card, Overlay, XIcon, Dropdown},
@@ -103,6 +101,3 @@ export default defineComponent({
   }
 })
 </script>
-
-<style scoped lang="scss">
-</style>

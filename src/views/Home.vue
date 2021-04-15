@@ -56,19 +56,16 @@
   </Card>
   <RouterView></RouterView>
 </template>
-
 <script lang="ts">
 import { defineComponent } from 'vue'
 import Card from "../components/Card.vue";
 import Dropdown from "../components/Dropdown.vue";
-
 import { ChevronLeftIcon, PlusIcon, FlagIcon } from '@heroicons/vue/solid'
 import {mapActions, mapGetters, mapMutations, mapState} from "vuex";
 import fetchQuestions from "../mixins/fetchQuestions";
 import Question from "../question/Question";
 import CategoryObject from "../category/CategoryObject";
 import {CategoryType} from "../category/CategoryType";
-
 export default defineComponent({
   name: 'Home',
   components: {Dropdown, ChevronLeftIcon, PlusIcon, Card, FlagIcon},
@@ -115,6 +112,3 @@ export default defineComponent({
   }
 })
 </script>
-
-<style scoped lang="scss">
-</style>

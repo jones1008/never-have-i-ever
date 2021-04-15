@@ -21,10 +21,12 @@ export default createStore({
             } as CategoryObject,
             ...categories
         ];
+
         let defaultCategory = allCategories.find(c => c.value === config.defaultCategory);
         if (defaultCategory) {
             defaultCategory.isChosen = true;
         }
+
         return {
             globalSuccess: null,
             globalError: null,
@@ -38,31 +40,40 @@ export default createStore({
             state.globalError = null;
             state.globalSuccess = value;
         },
+
         globalError(state: any, value) {
             state.globalSuccess = null;
             state.globalError = value;
         },
+
         questions(state: any, value) {
             state.questions = value;
         },
+
         setQuestion(state: any, question: Question) {
             let foundQuestion = state.questions.find(q => q.id === question.id);
+
             if (foundQuestion) {
                 foundQuestion = question;
             }
         },
+
         removeQuestion(state: any, question: Question) {
             let foundQuestionIndex = state.questions.findIndex(q => q.id === question.id);
+
             if (foundQuestionIndex !== -1) {
                 state.questions.splice(foundQuestionIndex, 1);
             }
         },
+
         addToQuestions(state: any, question: Question) {
             state.questions.push(question);
         },
+
         currentQuestionIndex(state: any, value) {
             state.currentQuestionIndex = value;
         },
+
         allCategories(state: any, value) {
             state.allCategores = value;
         },
@@ -74,6 +85,7 @@ export default createStore({
             }
             return null;
         },
+
         currentCategory(state, getters): CategoryType {
             let chosenCategoryObj = state.allCategories.find(i => i.isChosen);
             if (chosenCategoryObj) {
@@ -81,9 +93,11 @@ export default createStore({
             }
             return "all"
         },
+
         isLastQuestion(state, getters): boolean {
             return state.currentQuestionIndex >= state.questions.length - 1;
         },
+
         isFirstQuestion(state, getters): boolean {
             return state.currentQuestionIndex === 0;
         },
@@ -96,6 +110,7 @@ export default createStore({
                 context.commit("currentQuestionIndex", ++context.state.currentQuestionIndex);
             }
         },
+
         prevQuestion(context) {
             if (context.getters.isFirstQuestion) {
                 context.commit("currentQuestionIndex", context.state.questions.length - 1);

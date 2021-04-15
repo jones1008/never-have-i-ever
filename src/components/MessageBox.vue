@@ -11,11 +11,9 @@
     </button>
   </div>
 </template>
-
 <script lang="ts">
 import {defineComponent} from "vue";
 import { XIcon } from '@heroicons/vue/solid'
-
 export default defineComponent({
   name: "MessageBox",
   props: {
@@ -61,7 +59,6 @@ export default defineComponent({
   }
 });
 </script>
-
 <style scoped lang="scss">
 .message-box {
   @apply container fixed bottom-6 flex items-center justify-center;
