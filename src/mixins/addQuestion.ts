@@ -13,7 +13,6 @@ export default {
                 if (text) {
                     let question: Question = new Question();
                     question.text = this.optimizeQuestion(text);
-                    // TODO: überprüfen, ob es diese Frage bereits gibt oder ähnlich: Levensthein Distance, Fuzzy Hashing?
                     question.reports = 0;
                     question.categories = categories;
                     return question.save().then((createdQuestion) => {

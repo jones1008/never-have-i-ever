@@ -47,7 +47,6 @@ import Overlay from "../components/Overlay.vue";
 import Card from "../components/Card.vue";
 import Dropdown from "../components/Dropdown.vue";
 import { XIcon } from '@heroicons/vue/solid'
-import {Category} from "../category/Category";
 import config from "../config";
 import {mapGetters} from "vuex";
 import clone from "../utils/clone";
@@ -71,7 +70,7 @@ export default defineComponent({
     this.focusText();
   },
   computed: {
-    chosenCategories(): Category[] {
+    chosenCategories(): CategoryType[] {
       let items = this.categories.filter(i => i.isChosen);
       let categories: CategoryType[] = [];
       for (let item of items) {
