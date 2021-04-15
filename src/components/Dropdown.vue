@@ -46,6 +46,7 @@
 import { defineComponent } from 'vue'
 import { ChevronDownIcon, CheckIcon} from '@heroicons/vue/outline'
 import Overlay from '../components/Overlay.vue';
+
 export default defineComponent({
   name: "Dropdown",
   props: {
@@ -116,6 +117,7 @@ export default defineComponent({
   }
 });
 </script>
+
 <style scoped lang="scss">
 @import "../scss/dropdown";
 </style>

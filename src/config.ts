@@ -20,5 +20,6 @@ export default {
         } as CategoryObject
     ],
     defaultCategory: Category.party,
-    reportLimit: 3
+    reportLimit: 3,
+    maxEditSimilarity: 0.75
 }

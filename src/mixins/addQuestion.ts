@@ -34,10 +34,10 @@ export default {
         },
 
         optimizeQuestion(text: string): string {
-            text = text.trim().replace(/^ich hab*. noch nie/i, '').trim();
-            if (text.substr(-1) !== ".") {
-                text = text + ".";
-            }
+            // text = text.trim();
+            // text = text.replace(/^ich hab*. noch nie/i, ''); // remove unnecessary starting
+            // text = text.replace(/[\.\?\!]+$/g, ''); // remove sentence endings
+            text = text.trim();
             return text;
         },
     }

@@ -17,10 +17,12 @@
       :timeout="5000"
   ></MessageBox>
 </template>
+
 <script lang="ts">
 import {defineComponent} from "vue";
 import MessageBox from './components/MessageBox.vue';
 import {mapMutations, mapState} from "vuex";
+
 export default defineComponent({
   name: 'App',
   components: {MessageBox},
@@ -36,6 +38,7 @@ export default defineComponent({
   }
 })
 </script>
+
 <style lang="scss">
 @import "./scss/app";
 </style>

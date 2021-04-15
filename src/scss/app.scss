@@ -44,3 +44,6 @@
     @apply bg-gradient-to-r from-yellow-500 to-pink-500;
   }
 }
+.dynamic-heading {
+  @apply text-2xl sm:text-3xl md:text-4xl font-extrabold
+}

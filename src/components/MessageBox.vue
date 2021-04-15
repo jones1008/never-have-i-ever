@@ -11,9 +11,11 @@
     </button>
   </div>
 </template>
+
 <script lang="ts">
 import {defineComponent} from "vue";
 import { XIcon } from '@heroicons/vue/solid'
+
 export default defineComponent({
   name: "MessageBox",
   props: {
@@ -59,6 +61,7 @@ export default defineComponent({
   }
 });
 </script>
+
 <style scoped lang="scss">
 @import "../scss/messageBox";
 </style>

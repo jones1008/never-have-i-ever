@@ -24,8 +24,11 @@
       >
         {{ errorMessage }}
       </p>
-      <p v-else-if="currentQuestion">
-        ...{{currentQuestion.text}}
+      <p
+          v-else-if="currentQuestion"
+          @click="$router.push({name: 'edit-question'})"
+      >
+        ...{{currentQuestion.text}}.
       </p>
       <p v-else>
         Lädt Fragen...
@@ -56,6 +59,7 @@
   </Card>
   <RouterView></RouterView>
 </template>
+
 <script lang="ts">
 import { defineComponent } from 'vue'
 import Card from "../components/Card.vue";
@@ -66,6 +70,7 @@ import fetchQuestions from "../mixins/fetchQuestions";
 import Question from "../question/Question";
 import CategoryObject from "../category/CategoryObject";
 import {CategoryType} from "../category/CategoryType";
+
 export default defineComponent({
   name: 'Home',
   components: {Dropdown, ChevronLeftIcon, PlusIcon, Card, FlagIcon},

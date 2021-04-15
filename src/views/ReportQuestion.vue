@@ -2,7 +2,7 @@
   <Overlay :onClick="goHome"></Overlay>
   <Card>
     <template v-slot:card-top-left>
-      <p class="text-2xl sm:text-3xl md:text-4xl font-extrabold m-5">
+      <p class="dynamic-heading m-5">
         Frage rauswerfen?
       </p>
     </template>
@@ -29,6 +29,7 @@
     </template>
   </Card>
 </template>
+
 <script lang="ts">
 import {defineComponent} from "vue";
 import Overlay from "../components/Overlay.vue";
@@ -36,6 +37,7 @@ import Card from "../components/Card.vue";
 import {XIcon} from '@heroicons/vue/solid';
 import {mapGetters, mapMutations} from "vuex";
 import reportQuestion from "../mixins/reportQuestion";
+
 export default defineComponent({
   name: "ReportQuestion",
   components: {Card, Overlay, XIcon},

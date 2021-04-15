@@ -2,6 +2,7 @@ import { createWebHistory, createRouter } from "vue-router";
 import Home from "./views/Home.vue";
 import AddQuestion from "./views/AddQuestion.vue";
 import ReportQuestion from "./views/ReportQuestion.vue";
+import EditQuestion from "./views/EditQuestion.vue";
 
 const routes = [
     {
@@ -18,6 +19,11 @@ const routes = [
                 path: "report-question",
                 name: "report-question",
                 component: ReportQuestion
+            },
+            {
+                path: "edit-question",
+                name: "edit-question",
+                component: EditQuestion
             }
         ]
     },
