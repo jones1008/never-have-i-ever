@@ -1,0 +1,41 @@
+.dropdown {
+  @apply relative p-4;
+  @apply text-2xl font-extrabold text-left;
+  @apply cursor-pointer select-none;
+  .item {
+    @apply flex;
+    @apply items-center py-2;
+    .icon {
+      @apply flex mr-3;
+      svg {
+        @apply h-7 w-7 inline;
+      }
+    }
+    &.isChosen {
+      @apply flex;
+      @apply text-2xl font-extrabold text-gray-500;
+    }
+    &.blank {
+      @apply text-xl text-gray-400;
+    }
+    > svg {
+      @apply inline h-5 w-5;
+    }
+  }
+  &.isOpen {
+    @apply rounded-3xl bg-white shadow-2xl;
+    .item {
+      &.isChosen {
+        @apply text-black;
+      }
+    }
+  }
+}
+@keyframes dropdown-open {
+  from {
+    height: 0;
+  }
+  to {
+    height: 100%;
+  }
+}

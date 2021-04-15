@@ -60,23 +60,5 @@ export default defineComponent({
 });
 </script>
 <style scoped lang="scss">
-.message-box {
-  @apply container fixed bottom-6 flex items-center justify-center;
-  height: fit-content !important;
-  width: fit-content !important;
-  left: 50%;
-  transform: translateX(-50%);
-  @apply rounded-3xl;
-  @apply h-14 py-4 px-8;
-  @apply shadow-2xl;
-  .message {
-    @apply text-white font-extrabold text-2xl;
-  }
-  svg {
-    @apply w-7 h-7 m-4 text-gray-100;
-  }
-  &.icon-right {
-    @apply pr-2;
-  }
-}
+@import "../scss/messageBox";
 </style>

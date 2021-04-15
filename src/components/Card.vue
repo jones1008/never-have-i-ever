@@ -28,42 +28,5 @@ export default defineComponent({
 });
 </script>
 <style scoped lang="scss">
-$card-height: 80vh;
-.card {
-  @apply w-full mx-auto absolute;
-  min-height: $card-height;
-  max-width: 1200px;
-  @apply flex justify-center items-center flex-col;
-  @apply shadow-2xl;
-  border-radius: 2.5rem;
-  @apply bg-white;
-  .card-top {
-    @apply absolute p-4 top-0;
-    width: 100%;
-    @apply flex justify-between;
-    .card-top-left {
-      @apply absolute left-2;
-    }
-    .card-top-right-btns {
-      @apply absolute right-2;
-      @apply flex place-items-center p-2;
-    }
-  }
-  .card-center {
-    min-height: $card-height;
-    @apply w-full flex justify-center items-center;
-    .card-text {
-      @apply w-5/6;
-      @apply px-2 sm:px-0;
-      @apply font-extrabold text-2xl sm:text-3xl md:text-4xl lg:text-5xl;
-      @apply leading-snug;
-      @apply relative -top-4;
-    }
-  }
-  .card-action {
-    @apply absolute p-4 bottom-0;
-    width: 100%;
-    @apply flex justify-between;
-  }
-}
+@import "../scss/card";
 </style>
