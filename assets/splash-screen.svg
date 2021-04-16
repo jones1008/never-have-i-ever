@@ -9,14 +9,17 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    class="h-5 w-5"
-   viewBox="0 0 640.00002 1136"
+   viewBox="0 0 750.00002 1334"
    version="1.1"
    id="svg4"
    sodipodi:docname="splash-screen.svg"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
-   width="640"
-   height="1136"
-   style="fill:currentColor">
+   width="750"
+   height="1334"
+   style="fill:currentColor"
+   inkscape:export-filename="C:\Users\Jonas Fluhrer\Projects\never-have-i-ever-vue\public\img\splash\iOS-750x1334-portrait.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96">
   <metadata
      id="metadata10">
     <rdf:RDF>
@@ -56,7 +59,7 @@
        x2="21.80493"
        y2="19.050692"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(32.163792,0,0,57.090731,1.1071045e-5,0.0028736)" />
+       gradientTransform="matrix(37.691944,0,0,67.0414,1.2973881e-5,0.00339525)" />
   </defs>
   <sodipodi:namedview
      pagecolor="#ffffff"
@@ -67,15 +70,15 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1825"
+     inkscape:window-width="1823"
      inkscape:window-height="1057"
      id="namedview6"
      showgrid="false"
-     inkscape:zoom="0.36875"
-     inkscape:cx="269.09055"
-     inkscape:cy="692.2786"
-     inkscape:window-x="2007"
-     inkscape:window-y="-8"
+     inkscape:zoom="0.52149125"
+     inkscape:cx="112.5771"
+     inkscape:cy="707.93506"
+     inkscape:window-x="2009"
+     inkscape:window-y="341"
      inkscape:window-maximized="1"
      inkscape:current-layer="svg4"
      fit-margin-top="0"
@@ -83,27 +86,28 @@
      fit-margin-right="0"
      fit-margin-bottom="0" />
   <rect
-     style="opacity:1;fill:url(#linearGradient827);fill-opacity:1;stroke:none;stroke-width:538.98236084;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+     style="opacity:1;fill:url(#linearGradient827);fill-opacity:1;stroke:none;stroke-width:632.27197266;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
      id="rect819"
-     width="640"
-     height="1136"
+     width="750"
+     height="1334"
      x="0"
-     y="0"
+     y="3.528595e-005"
      ry="0" />
   <path
-     d="m 352.56617,387.86044 a 13.597538,13.597538 0 0 0 -19.71642,-5.23358 c -4.69114,3.12663 -8.34889,7.58704 -11.17719,11.96523 -2.90987,4.48777 -5.4798,9.69561 -7.75059,15.1741 -4.54158,10.93274 -8.34889,24.04165 -11.42193,37.1764 a 426.4868,426.4868 0 0 0 -8.3353,48.67938 35.897502,35.897502 0 0 1 -12.84967,-14.50881 c -4.45999,-9.24617 -5.41182,-20.85863 -5.41182,-36.08751 a 13.597538,13.597538 0 0 0 -23.211,-9.61338 94.924414,94.924414 0 0 0 -27.87495,67.30704 95.182769,95.182769 0 1 0 162.49059,-67.30704 c -8.04975,-8.03648 -13.3256,-13.39408 -18.32949,-19.94863 -4.9359,-6.47232 -9.84463,-14.45392 -16.41223,-27.6032 z m -3.73933,170.8804 a 40.792616,40.792616 0 0 1 -69.61939,-28.8259 c 0,0 11.95224,6.79776 33.99385,6.79776 0,-13.59702 6.79878,-54.38975 16.99692,-61.18751 6.79876,13.59702 10.68767,17.58065 18.64222,25.54943 a 40.656641,40.656641 0 0 1 11.95224,28.84032 40.656641,40.656641 0 0 1 -11.95224,28.84042 z"
+     d="m 413.16349,455.4629 a 15.934615,15.967531 0 0 0 -23.10519,-6.14577 c -5.49742,3.67158 -9.78385,8.90942 -13.09827,14.05072 -3.41,5.26996 -6.42164,11.38551 -9.08272,17.81888 -5.32216,12.83827 -9.78386,28.232 -13.38508,43.65609 a 499.78922,500.82163 0 0 0 -9.76792,57.16399 42.067385,42.154284 0 0 1 -15.05821,-17.03764 c -5.22655,-10.85774 -6.34198,-24.4942 -6.34198,-42.3774 a 15.934615,15.967531 0 0 0 -27.20039,-11.28896 111.23955,111.46933 0 0 0 -32.66596,79.03837 111.54231,111.77272 0 1 0 190.41867,-79.03837 c -9.4333,-9.4372 -15.61594,-15.72861 -21.47987,-23.42559 -5.78426,-7.60042 -11.53668,-16.97318 -19.23308,-32.41432 z m -4.38204,200.66413 a 47.803847,47.902595 0 0 1 -81.58522,-33.85014 c 0,0 14.00654,7.98258 39.83655,7.98258 0,-15.96692 7.96732,-63.86965 19.91826,-71.85223 7.9673,15.96693 12.52461,20.64489 21.84635,30.00259 a 47.644502,47.742921 0 0 1 14.00654,33.86706 47.644502,47.742921 0 0 1 -14.00654,33.86718 z"
      id="path2"
-     style="clip-rule:evenodd;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke-width:13.5975399"
+     style="clip-rule:evenodd;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke-width:15.95106602"
      inkscape:connector-curvature="0" />
   <text
      xml:space="preserve"
-     style="font-style:normal;font-weight:normal;font-size:47.88127136px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.19703174"
-     x="119.46231"
-     y="677.33124"
-     id="text820"><tspan
+     style="font-style:normal;font-weight:normal;font-size:56.16878891px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.40421963"
+     x="140.13942"
+     y="794.56696"
+     id="text820"
+     transform="scale(0.99896874,1.0010323)"><tspan
        sodipodi:role="line"
        id="tspan818"
-       x="119.46231"
-       y="677.33124"
-       style="font-style:normal;font-variant:normal;font-weight:900;font-stretch:normal;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI Heavy';fill:#ffffff;fill-opacity:1;stroke-width:1.19703174">Ich hab' noch nie</tspan></text>
+       x="140.13942"
+       y="794.56696"
+       style="font-style:normal;font-variant:normal;font-weight:900;font-stretch:normal;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI Heavy';fill:#ffffff;fill-opacity:1;stroke-width:1.40421963">Ich hab' noch nie</tspan></text>
 </svg>

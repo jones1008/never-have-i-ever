@@ -16,7 +16,10 @@
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
    width="19.898149"
    height="19.898149"
-   style="fill:currentColor">
+   style="fill:currentColor"
+   inkscape:export-filename="C:\Users\Jonas Fluhrer\Projects\never-have-i-ever-vue\img\icons\homescreen192.png"
+   inkscape:export-xdpi="926.31732"
+   inkscape:export-ydpi="926.31732">
   <metadata
      id="metadata10">
     <rdf:RDF>
@@ -25,7 +28,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -66,15 +69,15 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1825"
+     inkscape:window-width="1823"
      inkscape:window-height="1057"
      id="namedview6"
      showgrid="false"
-     inkscape:zoom="11.8"
-     inkscape:cx="9.4339296"
-     inkscape:cy="9.4100273"
-     inkscape:window-x="2007"
-     inkscape:window-y="-8"
+     inkscape:zoom="16.68772"
+     inkscape:cx="8.9905687"
+     inkscape:cy="3.585052"
+     inkscape:window-x="2009"
+     inkscape:window-y="341"
      inkscape:window-maximized="1"
      inkscape:current-layer="svg4"
      fit-margin-top="0"
