@@ -17,11 +17,9 @@
       </button>
     </template>
     <template v-slot:card-text>
-      <span
-          class="text-gray-400"
-          @click="focusText"
-      >Ich hab' noch nie&nbsp;</span>
-      <EditQuestionComponent v-model:text="text"></EditQuestionComponent>
+      <EditQuestionComponent v-model:text="text">
+        <span class="text-gray-400">Ich hab' noch nie&nbsp;</span>
+      </EditQuestionComponent>
     </template>
     <template v-slot:card-action>
       <button

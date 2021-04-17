@@ -1,11 +1,14 @@
 <template>
-  <span
-    class="text-black"
-    contenteditable="true"
-    ref="text"
-    @input="onInput"
-    autocapitalize="none"
-  >{{text}}</span>.
+  <div @click="focusText">
+    <slot></slot>
+    <span
+      class="text-black"
+      contenteditable="true"
+      ref="text"
+      @input="onInput"
+      autocapitalize="none"
+    >{{text}}</span>.
+  </div>
 </template>
 
 <script lang="ts">
