@@ -32,8 +32,7 @@ export default defineConfig({
                     {
                         src: "img/icons/fire192.png",
                         sizes: "192x192",
-                        type: "image/png",
-                        purpose: "maskable"
+                        type: "image/png"
                     }
                 ]
             },
