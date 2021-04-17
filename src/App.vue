@@ -22,10 +22,17 @@
 import {defineComponent} from "vue";
 import MessageBox from './components/MessageBox.vue';
 import {mapMutations, mapState} from "vuex";
+import pwaMixin from "./mixins/pwa";
 
 export default defineComponent({
   name: 'App',
   components: {MessageBox},
+  mixins: [pwaMixin],
+  created() {
+    if (this.mobileBrowser && !this.isPWA) {
+      this.$router.push({name: "install"})
+    }
+  },
   computed: {
     globalError: {
       ...mapState({get: "globalError"}),

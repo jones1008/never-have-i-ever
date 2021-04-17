@@ -3,6 +3,7 @@ import Home from "./views/Home.vue";
 import AddQuestion from "./views/AddQuestion.vue";
 import ReportQuestion from "./views/ReportQuestion.vue";
 import EditQuestion from "./views/EditQuestion.vue";
+import Install from "./views/Install.vue";
 
 const routes = [
     {
@@ -24,6 +25,11 @@ const routes = [
                 path: "edit-question",
                 name: "edit-question",
                 component: EditQuestion
+            },
+            {
+                path: "install",
+                name: "install",
+                component: Install
             }
         ]
     },
