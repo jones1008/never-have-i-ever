@@ -1,5 +1,6 @@
 #app {
   @apply text-center;
+  touch-action: pan-y;
 }
 .caption {
   @apply font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white;
