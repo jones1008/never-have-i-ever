@@ -6,7 +6,7 @@ import store from './store';
 
 import firebase from "firebase/app";
 import 'firebase/firestore';
-import {firebaseConfig} from "../local.config";
+import {firebaseConfig} from "../firebaseConfig";
 import {FirestoreOrmRepository} from "@arbel/firebase-orm";
 
 let firebaseApp = firebase.initializeApp(firebaseConfig);
@@ -17,3 +17,7 @@ createApp(App)
     .use(router)
     .use(store)
     .mount('#app');
+
+
+import {registerSW} from 'virtual:pwa-register';
+registerSW();

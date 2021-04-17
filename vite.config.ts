@@ -7,6 +7,7 @@ export default defineConfig({
     plugins: [
         vue(),
         VitePWA({
+            registerType: 'autoUpdate',
             manifest: {
                 name: "Ich hab' noch nie",
                 short_name: "Ich hab' noch nie",
@@ -39,7 +40,8 @@ export default defineConfig({
                     sizes: "192x192",
                     type: "image/png"
                 }]
-            }
+            },
+            workbox: {}
         })
     ]
 })

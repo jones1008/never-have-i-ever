@@ -5,5 +5,6 @@ dist-ssr
 *.local
 
 .idea
-local.config.ts
+firebaseConfig.ts
 .firebase
+certs/
