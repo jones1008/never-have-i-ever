@@ -5,14 +5,13 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    class="h-5 w-5"
    viewBox="0 0 17.411063 19.89815"
    version="1.1"
    id="svg4"
-   sodipodi:docname="fire.svg"
+   sodipodi:docname="fire-white.svg"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
    width="17.411062"
    height="19.898149"
@@ -28,35 +27,12 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <defs
-     id="defs8">
-    <linearGradient
-       inkscape:collect="always"
-       id="linearGradient4524">
-      <stop
-         style="stop-color:#f59e0b;stop-opacity:1"
-         offset="0"
-         id="stop4520" />
-      <stop
-         style="stop-color:#ec4899;stop-opacity:1"
-         offset="1"
-         id="stop4522" />
-    </linearGradient>
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient4524"
-       id="linearGradient4526"
-       x1="2.999995"
-       y1="9.9995747"
-       x2="17"
-       y2="9.9995747"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(1.2436468,0,0,1.2436468,-3.7309343,-2.4868644)" />
-  </defs>
+     id="defs8" />
   <sodipodi:namedview
      pagecolor="#ffffff"
      bordercolor="#666666"
@@ -71,8 +47,8 @@
      id="namedview6"
      showgrid="false"
      inkscape:zoom="16.68772"
-     inkscape:cx="-1.3549556"
-     inkscape:cy="9.7243534"
+     inkscape:cx="6.1710872"
+     inkscape:cy="14.542551"
      inkscape:window-x="1996"
      inkscape:window-y="13"
      inkscape:window-maximized="1"
@@ -84,6 +60,6 @@
   <path
      d="M 11.684068,0.68816595 A 1.2436468,1.2436468 0 0 0 9.880781,0.20936195 C 9.451724,0.49540065 9.117182,0.90331685 8.858502,1.3037712 8.592362,1.7141746 8.357313,2.1904913 8.149624,2.691681 7.734246,3.6915729 7.386025,4.8904485 7.104961,6.0918114 A 39.006982,39.006982 0 0 0 6.342605,10.54407 3.2832277,3.2832277 0 0 1 5.167359,9.2170958 C 4.759442,8.3714159 4.672387,7.3093416 4.672387,5.9164572 A 1.2436468,1.2436468 0 0 0 2.549482,5.0371989 8.6818984,8.6818984 0 0 0 6.2520164e-6,11.193253 8.7055276,8.7055276 0 1 0 14.861586,5.0371989 C 14.125348,4.3022036 13.642813,3.8122068 13.18515,3.212769 12.733707,2.6207932 12.284751,1.8907724 11.684068,0.68816595 Z M 11.342066,16.317078 A 3.7309404,3.7309404 0 0 1 4.974593,13.680546 c 0,0 1.093166,0.621823 3.109118,0.621823 0,-1.243648 0.621824,-4.9745886 1.554557,-5.5964121 0.621825,1.2436473 0.977508,1.6080371 1.705041,2.3368141 a 3.718504,3.718504 0 0 1 1.093166,2.637775 3.718504,3.718504 0 0 1 -1.093166,2.637773 z"
      id="path2"
-     style="clip-rule:evenodd;fill:url(#linearGradient4526);fill-opacity:1;fill-rule:evenodd;stroke-width:1.24364686"
+     style="clip-rule:evenodd;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke-width:1.24364686"
      inkscape:connector-curvature="0" />
 </svg>

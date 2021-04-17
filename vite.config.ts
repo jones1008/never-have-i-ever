@@ -21,20 +21,7 @@ export default defineConfig({
                 display: "standalone",
                 theme_color: "#F67730",
                 background_color: "#F67730",
-                description: "Ein einfaches Partyspiel mit Fragen, bei der man auch selbst Fragen hinzufügen kann",
-                icons: [
-                    {
-                        src: "img/icons/fire512.png",
-                        sizes: "512x512",
-                        type: "image/png",
-                        purpose: "maskable"
-                    },
-                    {
-                        src: "img/icons/fire192.png",
-                        sizes: "192x192",
-                        type: "image/png"
-                    }
-                ]
+                description: "Ein einfaches Partyspiel mit Fragen, bei der man auch selbst Fragen hinzufügen kann"
             },
             workbox: {}
         })
