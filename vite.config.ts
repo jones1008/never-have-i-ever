@@ -1,9 +1,16 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { VitePWA } from 'vite-plugin-pwa'
+import * as fs from "fs";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+    server: {
+        https: {
+            key: fs.readFileSync('./certs/localhost-key.pem'),
+            cert: fs.readFileSync('./certs/localhost.pem')
+        }
+    },
     plugins: [
         vue(),
         VitePWA({
@@ -15,31 +22,20 @@ export default defineConfig({
                 theme_color: "#F67730",
                 background_color: "#F67730",
                 description: "Ein einfaches Partyspiel mit Fragen, bei der man auch selbst Fragen hinzufügen kann",
-                icons: [{
-                    src: "/img/icons/homescreen48.png",
-                    sizes: "48x48",
-                    type: "image/png"
-                }, {
-                    src: "/img/icons/homescreen72.png",
-                    sizes: "72x72",
-                    type: "image/png"
-                }, {
-                    src: "/img/icons/homescreen96.png",
-                    sizes: "96x96",
-                    type: "image/png"
-                }, {
-                    src: "/img/icons/homescreen144.png",
-                    sizes: "144x144",
-                    type: "image/png"
-                }, {
-                    src: "/img/icons/homescreen168.png",
-                    sizes: "168x168",
-                    type: "image/png"
-                }, {
-                    src: "/img/icons/homescreen192.png",
-                    sizes: "192x192",
-                    type: "image/png"
-                }]
+                icons: [
+                    {
+                        src: "img/icons/fire512.png",
+                        sizes: "512x512",
+                        type: "image/png",
+                        purpose: "maskable"
+                    },
+                    {
+                        src: "img/icons/fire192.png",
+                        sizes: "192x192",
+                        type: "image/png",
+                        purpose: "maskable"
+                    }
+                ]
             },
             workbox: {}
         })

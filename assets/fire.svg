@@ -16,7 +16,10 @@
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
    width="19.898149"
    height="19.898149"
-   style="fill:currentColor">
+   style="fill:currentColor"
+   inkscape:export-filename="C:\Users\Jonas Fluhrer\Projects\never-have-i-ever-vue\public\img\icons\fire192.png"
+   inkscape:export-xdpi="926.32001"
+   inkscape:export-ydpi="926.32001">
   <metadata
      id="metadata10">
     <rdf:RDF>
@@ -25,7 +28,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -52,7 +55,7 @@
        x2="17"
        y2="9.9995747"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(1.2436465,0,0,1.2436465,-2.4874333,-2.4868593)" />
+       gradientTransform="matrix(0.90844528,0,0,0.90844528,0.86457809,0.86501037)" />
   </defs>
   <sodipodi:namedview
      pagecolor="#ffffff"
@@ -63,24 +66,30 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1825"
-     inkscape:window-height="1057"
+     inkscape:window-width="1596"
+     inkscape:window-height="1027"
      id="namedview6"
      showgrid="false"
      inkscape:zoom="23.6"
-     inkscape:cx="5.3537781"
-     inkscape:cy="9.4242599"
-     inkscape:window-x="2007"
-     inkscape:window-y="-8"
+     inkscape:cx="4.3621487"
+     inkscape:cy="9.5011822"
+     inkscape:window-x="1996"
+     inkscape:window-y="13"
      inkscape:window-maximized="1"
      inkscape:current-layer="svg4"
      fit-margin-top="0"
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0" />
+  <circle
+     style="opacity:1;fill:#24adb5;fill-opacity:1;stroke:none;stroke-width:16.63232231;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+     id="path821"
+     cx="-10.051"
+     cy="9.9491491"
+     r="9.9490004" />
   <path
-     d="M 12.927565,0.68817023 A 1.2436465,1.2436465 0 0 0 11.124278,0.20936632 C 10.69522,0.49540502 10.360679,0.90332107 10.102,1.3037753 9.8358599,1.7141786 9.6008107,2.1904952 9.3931217,2.6916848 8.9777438,3.6915765 8.6295228,4.8904518 8.3484587,6.0918143 A 39.006972,39.006972 0 0 0 7.5861034,10.544071 3.2832268,3.2832268 0 0 1 6.4108574,9.2170979 C 6.0029414,8.3714183 5.9158861,7.3093442 5.9158861,5.9164601 A 1.2436465,1.2436465 0 0 0 3.7929816,5.0372021 8.6818962,8.6818962 0 0 0 1.2435063,11.193254 8.7055255,8.7055255 0 1 0 16.105082,5.0372021 C 15.368843,4.302207 14.886308,3.8122103 14.428646,3.2127726 13.977203,2.6207969 13.528246,1.8907764 12.927565,0.68817023 Z M 12.585562,16.317078 A 3.7309395,3.7309395 0 0 1 6.2180922,13.680547 c 0,0 1.0931653,0.621823 3.1091163,0.621823 0,-1.243646 0.6218236,-4.9745875 1.5545575,-5.5964108 0.621824,1.2436469 0.977507,1.6080368 1.70504,2.3368138 a 3.718503,3.718503 0 0 1 1.093165,2.637774 3.718503,3.718503 0 0 1 -1.093165,2.637774 z"
+     d="M 12.124757,3.1842712 A 0.90844528,0.90844528 0 0 0 10.807512,2.8345198 C 10.494099,3.0434622 10.249727,3.3414323 10.060769,3.6339517 9.8663624,3.9337386 9.6946662,4.2816731 9.5429559,4.6477766 9.2395351,5.3781665 8.9851704,6.2539078 8.7798619,7.131466 A 28.493386,28.493386 0 0 0 8.2229848,10.383702 2.3982956,2.3982956 0 0 1 7.3645041,9.4143889 C 7.066534,8.7966461 7.0029429,8.0208339 7.0029429,7.0033752 A 0.90844528,0.90844528 0 0 0 5.4522268,6.3611044 6.3418565,6.3418565 0 0 0 3.589914,10.85791 6.3591169,6.3591169 0 1 0 14.445835,6.3611044 C 13.908036,5.8242132 13.555559,5.4662858 13.221251,5.0284151 12.891486,4.5959952 12.563537,4.0627378 12.124757,3.1842712 Z M 11.874935,14.600705 A 2.7253358,2.7253358 0 0 1 7.2236951,12.674801 c 0,0 0.7985234,0.454222 2.2711131,0.454222 0,-0.908446 0.454223,-3.6337824 1.1355558,-4.0880051 0.454224,0.9084456 0.714039,1.1746211 1.245479,1.7069701 a 2.7162514,2.7162514 0 0 1 0.798524,1.926813 2.7162514,2.7162514 0 0 1 -0.798524,1.926811 z"
      id="path2"
-     style="clip-rule:evenodd;fill:url(#linearGradient4526);fill-opacity:1;fill-rule:evenodd;stroke-width:1.2436465"
+     style="clip-rule:evenodd;fill:url(#linearGradient4526);fill-opacity:1;fill-rule:evenodd;stroke-width:0.9084453"
      inkscape:connector-curvature="0" />
 </svg>

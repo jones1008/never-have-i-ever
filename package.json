@@ -5,6 +5,8 @@
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
+    "build-serve": "npm run build && npm run serve",
+    "install-cert": "mkcert -install && mkdir certs && cd certs/ && mkcert localhost",
     "deploy": "npm run build && firebase deploy"
   },
   "dependencies": {
@@ -25,6 +27,7 @@
     "@vue/compiler-sfc": "^3.0.5",
     "autoprefixer": "^10.2.5",
     "firebase-tools": "^9.8.0",
+    "http-server": "^0.12.3",
     "postcss": "^8.2.9",
     "sass": "^1.32.8",
     "tailwindcss": "^2.0.4",
