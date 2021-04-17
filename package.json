@@ -9,9 +9,9 @@
     "install-cert": "mkcert -install && mkdir certs && cd certs/ && mkcert localhost",
     "deploy": "npm run build && npm run gen-pwa-all && firebase deploy",
     "gen-pwa-all": "npm run gen-pwa-splash && npm run gen-pwa-favicon && npm run gen-pwa-icons",
-    "gen-pwa-splash": "pwa-asset-generator ./assets/splash-screen-icon.svg ./dist/img/splash --splash-only --index ./dist/index.html --path-override \"./img/splash\" --background \"linear-gradient(125deg, #f67730 0, #dd1c4e 50%, #24adb5 100%)\"",
-    "gen-pwa-favicon": "pwa-asset-generator ./assets/fire.svg ./dist/img/icons --icon-only --favicon --opaque false --padding \"0%\" --path-override \"./img/icons\" --index ./dist/index.html",
-    "gen-pwa-icons": "pwa-asset-generator ./assets/fire-white.svg ./dist/img/icons --icon-only --maskable false --path-override \"./img/icons\" --index ./dist/index.html --manifest ./dist/manifest.webmanifest --background \"linear-gradient(125deg, #f67730 0, #dd1c4e 50%, #24adb5 100%)\""
+    "gen-pwa-splash": "pwa-asset-generator ./assets/splash-screen-icon.svg ./dist/img/splash --splash-only --quality 100 --padding \"15%\" --index ./dist/index.html --path-override \"./img/splash\" --background \"linear-gradient(125deg, #f67730 0, #dd1c4e 50%, #24adb5 100%)\"",
+    "gen-pwa-favicon": "pwa-asset-generator ./assets/fire.svg ./dist/img/icons --icon-only --favicon --type png --opaque false --padding \"0%\" --path-override \"./img/icons\" --index ./dist/index.html",
+    "gen-pwa-icons": "pwa-asset-generator ./assets/fire-white.svg ./dist/img/icons --icon-only --maskable false --type png --path-override \"./img/icons\" --index ./dist/index.html --manifest ./dist/manifest.webmanifest --background \"linear-gradient(125deg, #f67730 0, #dd1c4e 50%, #24adb5 100%)\""
   },
   "dependencies": {
     "@arbel/firebase-orm": "^1.4.4",

@@ -19,8 +19,8 @@ export default defineConfig({
                 name: "Ich hab' noch nie",
                 short_name: "Ich hab' noch nie",
                 display: "standalone",
-                theme_color: "#F67730",
-                background_color: "#F67730",
+                theme_color: "#f67730",
+                background_color: "#f67730",
                 description: "Ein einfaches Partyspiel mit Fragen, bei der man auch selbst Fragen hinzufügen kann"
             },
             workbox: {}
