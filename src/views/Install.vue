@@ -14,6 +14,8 @@
     </template>
     <template v-slot:card-text>
       <div class="card-text-container">
+        <br>
+        <br>
         <div class="pseudo-apps">
           <div class="bg-gray-300"></div>
           <div>
@@ -24,7 +26,16 @@
         </div>
         <br>
         <ol class="relative">
-          <li>
+          <li v-if="mobileBrowser === 'Safari' || mobileBrowser === 'Chrome'">
+            Öffne diese Seite
+            <template v-if="mobileBrowser === 'Safari'">
+              in Safari
+            </template>
+            <template v-else-if="mobileBrowser === 'Chrome'">
+              im Chrome
+            </template>
+          </li>
+          <li class="relative">
             Tippe auf
             <span class="italic">
               <template v-if="mobileBrowser === 'Safari'">

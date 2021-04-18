@@ -7,7 +7,7 @@
 }
 .card-text-container {
   @apply text-gray-600 font-normal text-lg;
-  @apply relative max-w-xl m-auto;
+  @apply relative max-w-md m-auto;
   ol {
     @apply text-left sm:text-xl md:text-2xl;
     list-style: revert;
