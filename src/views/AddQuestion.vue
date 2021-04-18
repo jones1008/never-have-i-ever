@@ -38,49 +38,15 @@ import Overlay from "../components/Overlay.vue";
 import Card from "../components/Card.vue";
 import Dropdown from "../components/Dropdown.vue";
 import { XIcon } from '@heroicons/vue/solid'
-import config from "../config";
-import {mapGetters} from "vuex";
-import clone from "../utils/clone";
-import CategoryObject from "../category/CategoryObject";
-import addQuestion from "../mixins/addQuestion";
-import {CategoryType} from "../category/CategoryType";
-import CategoryObjectBase from "../category/CategoryObjectBase";
+import addQuestion from "../logic/addQuestion";
 import EditQuestionComponent from "../components/EditQuestion.vue";
+import {goHome} from "../utils/router";
 
 export default defineComponent({
   name: "AddQuestion",
   components: {EditQuestionComponent, Card, Overlay, XIcon, Dropdown},
-  mixins: [addQuestion],
-  data: () => ({
-    text: "" as string,
-    dropdownBlank: {
-      text: "Kategorien",
-      iconColor: "text-gray-400"
-    } as CategoryObjectBase,
-    categories: clone.cloneArray(config.categories) as CategoryObject[]
-  }),
-  computed: {
-    chosenCategories(): CategoryType[] {
-      let items = this.categories.filter(i => i.isChosen);
-      let categories: CategoryType[] = [];
-      for (let item of items) {
-        categories.push(item.value);
-      }
-      return categories;
-    },
-    currentCategory: {
-      ...mapGetters({get: "currentCategory"})
-    } as CategoryType
-  },
-  methods: {
-    add(): void {
-      this.addQuestion(this.text, this.chosenCategories, this.currentCategory).then(() => {
-          this.goHome()
-      });
-    },
-    goHome(): void {
-      this.$router.push({name: 'home'})
-    }
+  setup() {
+    return {...addQuestion, goHome};
   }
 })
 </script>

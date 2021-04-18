@@ -4,9 +4,7 @@
       :transparent="true"
       v-if="isOpen"
   ></Overlay>
-  <div
-      :class="['dropdown', {isOpen: isOpen}]"
-  >
+  <div :class="['dropdown', {isOpen: isOpen}]">
     <div
         v-if="blank || blank && isOpen"
         class="item blank"
@@ -22,7 +20,7 @@
           v-show="chosenItems.length > 0 && !isOpen"
           class="text-black"
       >
-        {{ chosenItemsText }}
+        {{ chosenItems.map(i => i.text).join(', ') }}
       </div>
     </div>
     <div
@@ -46,24 +44,14 @@
 import { defineComponent } from 'vue'
 import { ChevronDownIcon, CheckIcon} from '@heroicons/vue/outline'
 import Overlay from '../components/Overlay.vue';
+import CategoryObject from "../category/CategoryObject";
+import CategoryObjectBase from "../category/CategoryObjectBase";
 
 export default defineComponent({
   name: "Dropdown",
   props: {
-    items: {
-      text: String,
-      isChosen: {
-        type: Boolean,
-        default: false
-      },
-      iconColor: String,
-      icon: Function
-    },
-    blank: {
-      text: String,
-      iconColor: String,
-      icon: Function
-    },
+    items: Object as () => CategoryObject[],
+    blank: Object as () => CategoryObjectBase,
     multiple: {
       type: Boolean,
       default: false
@@ -74,14 +62,11 @@ export default defineComponent({
     isOpen: false as boolean,
   }),
   computed: {
-    chosenItems() {
+    chosenItems(): CategoryObject[] {
       return this.realItems.filter(i => i.isChosen);
     },
-    chosenItemsText() {
-      return this.chosenItems.map(i => i.text).join(', ')
-    },
     realItems: {
-      get() {
+      get(): CategoryObject[] | undefined {
         return this.items;
       },
       set(value) {
