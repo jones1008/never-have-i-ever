@@ -16,7 +16,7 @@
     </template>
     <template v-slot:card-text>
       <span class="text-gray-500">
-        ...{{currentQuestion?.data.text}}
+        ...{{currentQuestion?.text}}.
       </span>
     </template>
     <template v-slot:card-action>
@@ -35,28 +35,14 @@ import {defineComponent} from "vue";
 import Overlay from "../components/Overlay.vue";
 import Card from "../components/Card.vue";
 import {XIcon} from '@heroicons/vue/solid';
-import {mapGetters, mapMutations} from "vuex";
-import reportQuestion from "../mixins/reportQuestion";
+import reportQuestion from "../composition/reportQuestion";
+import {goHome} from "../utils/router";
 
 export default defineComponent({
   name: "ReportQuestion",
   components: {Card, Overlay, XIcon},
-  mixins: [reportQuestion],
-  computed: {
-    currentQuestion: {
-      ...mapGetters({get: "currentQuestion"}),
-      ...mapMutations({set: "setQuestion"})
-    }
-  },
-  methods: {
-    report(): void {
-      this.reportQuestion(this.currentQuestion).then(() => {
-        this.goHome()
-      });
-    },
-    goHome(): void {
-      this.$router.push({name: 'home'})
-    }
+  setup() {
+    return {...reportQuestion, goHome}
   }
 });
 </script>

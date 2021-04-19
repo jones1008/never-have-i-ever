@@ -1,4 +1,5 @@
 let prefix = "NeverHaveIEver-";
+// @ts-ignore
 if (process.env.NODE_ENV === 'development') {
     prefix += "test-";
 }

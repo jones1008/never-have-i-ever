@@ -1,6 +1,6 @@
-import {Category} from "./category/Category";
+import {Category} from "./classes/category/Category";
 import { FireIcon, CakeIcon } from '@heroicons/vue/outline'
-import CategoryObject from "./category/CategoryObject";
+import CategoryObject from "./classes/category/CategoryObject";
 
 export default {
     categories: [

@@ -78,17 +78,15 @@
 import {defineComponent} from "vue";
 import Overlay from "../components/Overlay.vue";
 import Card from "../components/Card.vue";
-import pwaMixin from "../mixins/pwa";
+import pwa from "../composition/pwa";
 import {XIcon, DotsVerticalIcon, MenuIcon} from '@heroicons/vue/solid';
+import {goHome} from "../utils/router";
 
 export default defineComponent({
   name: "Install",
   components: {Overlay, Card, XIcon, DotsVerticalIcon, MenuIcon},
-  mixins: [pwaMixin],
-  methods: {
-    goHome(): void {
-      this.$router.push({name: "home"})
-    }
+  setup() {
+    return {...pwa, goHome}
   }
 })
 </script>

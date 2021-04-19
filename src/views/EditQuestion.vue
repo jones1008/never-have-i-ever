@@ -35,38 +35,14 @@ import Card from "../components/Card.vue";
 import EditQuestionComponent from "../components/EditQuestion.vue";
 import Dropdown from "../components/Dropdown.vue";
 import {XIcon} from '@heroicons/vue/solid';
-import {mapGetters} from "vuex";
-import editQuestion from "../mixins/editQuestion";
+import editQuestion from "../composition/editQuestion";
+import {goHome} from "../utils/router";
 
 export default defineComponent({
   name: "EditQuestion",
   components: {Overlay, Card, Dropdown, EditQuestionComponent, XIcon},
-  mixins: [editQuestion],
-  data: () => ({
-    newText: "" as string
-  }),
-  computed: {
-    currentQuestion: {
-      ...mapGetters({get: "currentQuestion"})
-    },
-    text: {
-      get() {
-        return this.currentQuestion?.text ?? "";
-      },
-      set(value) {
-        this.newText = value;
-      }
-    }
-  },
-  methods: {
-    goHome(): void {
-      this.$router.push({name: "home"})
-    },
-    edit(): void {
-      this.editQuestion(this.currentQuestion, this.newText).then(() => {
-        this.goHome();
-      });
-    }
+  setup() {
+    return {...editQuestion, goHome};
   }
 })
 </script>

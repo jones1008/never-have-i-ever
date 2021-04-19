@@ -1,12 +1,12 @@
 import {computed, reactive, ref} from "vue";
-import CategoryObjectBase from "../category/CategoryObjectBase";
-import CategoryObject from "../category/CategoryObject";
+import CategoryObjectBase from "../classes/category/CategoryObjectBase";
+import CategoryObject from "../classes/category/CategoryObject";
 import clone from "../utils/clone";
 import config from "../config";
-import {CategoryType} from "../category/CategoryType";
+import {CategoryType} from "../classes/category/CategoryType";
 import store from "../store";
-import {Category} from "../category/Category";
-import Question from "../question/Question";
+import {Category} from "../classes/category/Category";
+import Question from "../classes/question/Question";
 import {goHome} from "../utils/router";
 
 const text = ref<string>("");
@@ -43,11 +43,11 @@ const optimizeQuestion = (text: string): string => {
 
 const addQuestion = (text: string, categories: Category[], currentCategory: Category): Promise<Question> => {
     return new Promise((resolve, reject) => {
-        if (categories.length === 0) {
-            store.commit("globalError", "Kategorie wählen");
-            return reject("no category chosen");
-        }
         if (text) {
+            if (categories.length === 0) {
+                store.commit("globalError", "Kategorie wählen");
+                return reject("no category chosen");
+            }
             let question: Question = new Question();
             question.text = optimizeQuestion(text);
             question.reports = 0;
@@ -65,6 +65,7 @@ const addQuestion = (text: string, categories: Category[], currentCategory: Cate
                 return reject(err);
             });
         } else {
+            store.commit("globalError", "Bitte etwas eingeben");
             return reject("text is empty");
         }
     });

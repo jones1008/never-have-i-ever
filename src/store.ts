@@ -1,10 +1,10 @@
 import { createStore } from 'vuex'
-import Question from "./question/Question";
+import Question from "./classes/question/Question";
 import {SparklesIcon} from '@heroicons/vue/outline';
 import config from "./config";
 import clone from "./utils/clone";
-import CategoryObject from "./category/CategoryObject";
-import {CategoryType} from "./category/CategoryType";
+import CategoryObject from "./classes/category/CategoryObject";
+import {CategoryType} from "./classes/category/CategoryType";
 
 // Create a new store instance.
 export default createStore({
@@ -103,7 +103,7 @@ export default createStore({
         },
     },
     actions: {
-        nextQuestion(context) {
+        nextQuestion(context): void {
             if (context.getters.isLastQuestion) {
                 context.commit("currentQuestionIndex", 0);
             } else {
@@ -111,7 +111,7 @@ export default createStore({
             }
         },
 
-        prevQuestion(context) {
+        prevQuestion(context): void {
             if (context.getters.isFirstQuestion) {
                 context.commit("currentQuestionIndex", context.state.questions.length - 1);
             } else {

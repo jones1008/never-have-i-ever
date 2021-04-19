@@ -38,7 +38,7 @@ import Overlay from "../components/Overlay.vue";
 import Card from "../components/Card.vue";
 import Dropdown from "../components/Dropdown.vue";
 import { XIcon } from '@heroicons/vue/solid'
-import addQuestion from "../logic/addQuestion";
+import addQuestion from "../composition/addQuestion";
 import EditQuestionComponent from "../components/EditQuestion.vue";
 import {goHome} from "../utils/router";
 

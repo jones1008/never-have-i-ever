@@ -61,59 +61,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import {defineComponent} from 'vue'
 import Card from "../components/Card.vue";
 import Dropdown from "../components/Dropdown.vue";
 import { ChevronLeftIcon, PlusIcon, FlagIcon } from '@heroicons/vue/solid'
-import {mapActions, mapGetters, mapMutations, mapState} from "vuex";
-import fetchQuestions from "../mixins/fetchQuestions";
-import Question from "../question/Question";
-import CategoryObject from "../category/CategoryObject";
-import {CategoryType} from "../category/CategoryType";
+import fetchQuestions from "../composition/fetchQuestions";
 
 export default defineComponent({
   name: 'Home',
   components: {Dropdown, ChevronLeftIcon, PlusIcon, Card, FlagIcon},
-  mixins: [fetchQuestions],
-  async created() {
-    this.fetch();
-  },
-  data: () => ({
-    errorMessage: "" as string
-  }),
-  computed: {
-    currentQuestion: {
-      ...mapGetters({get: "currentQuestion"})
-    } as Question,
-    questions: {
-      ...mapState({ get: 'questions' }),
-      ...mapMutations({set: 'questions'})
-    } as Question[],
-    currentQuestionIndex: {
-      ...mapState({get: 'currentQuestionIndex'}),
-      ...mapMutations({set: 'currentQuestionIndex'})
-    } as number,
-    allCategories: {
-      ...mapState({get: 'allCategories'}),
-      ...mapMutations({set: 'allCategories'})
-    } as CategoryObject[],
-    currentCategory: {
-      ...mapGetters({get: 'currentCategory'})
-    } as CategoryType
-  },
-  methods: {
-    async fetch(): void {
-      this.questions = await this.fetchQuestions(this.currentCategory);
-      if (!this.questions || this.questions.length === 0) {
-        this.errorMessage = "Keine Fragen gefunden..."
-      }
-    },
-    ...mapActions(["nextQuestion", "prevQuestion"]),
-  },
-  watch: {
-    currentCategory(item): void {
-      this.fetch();
-    }
+  setup() {
+    fetchQuestions.fetch();
+    return fetchQuestions;
   }
 })
 </script>

@@ -21,27 +21,18 @@
 <script lang="ts">
 import {defineComponent} from "vue";
 import MessageBox from './components/MessageBox.vue';
-import {mapMutations, mapState} from "vuex";
-import pwaMixin from "./mixins/pwa";
+import pwa from "./composition/pwa";
+import app from "./composition/app";
+import router from "./router";
 
 export default defineComponent({
   name: 'App',
   components: {MessageBox},
-  mixins: [pwaMixin],
-  created() {
-    if (this.mobileBrowser && !this.isPWA) {
-      this.$router.push({name: "install"})
+  setup() {
+    if (pwa.mobileBrowser() && !pwa.isPWA()) {
+      router.push({name: "install"})
     }
-  },
-  computed: {
-    globalError: {
-      ...mapState({get: "globalError"}),
-      ...mapMutations({set: "globalError"})
-    },
-    globalSuccess: {
-      ...mapState({get: "globalSuccess"}),
-      ...mapMutations({set: "globalSuccess"})
-    }
+    return app;
   }
 })
 </script>

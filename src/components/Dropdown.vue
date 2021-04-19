@@ -44,8 +44,8 @@
 import { defineComponent } from 'vue'
 import { ChevronDownIcon, CheckIcon} from '@heroicons/vue/outline'
 import Overlay from '../components/Overlay.vue';
-import CategoryObject from "../category/CategoryObject";
-import CategoryObjectBase from "../category/CategoryObjectBase";
+import CategoryObject from "../classes/category/CategoryObject";
+import CategoryObjectBase from "../classes/category/CategoryObjectBase";
 
 export default defineComponent({
   name: "Dropdown",
