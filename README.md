@@ -1,6 +1,6 @@
 # *"Never have I ever"* web app
 
-Simple progressive web app (PWA) for the little party game called *"never have i ever"* (german: *"Ich hab' noch nie"*.
+Simple progressive web app (PWA) for the little party game called *"never have i ever"* (german: *"Ich hab' noch nie"*).
 
 It is available at [https://neverhaveiever.web.app](https://neverhaveiever.web.app).
 
