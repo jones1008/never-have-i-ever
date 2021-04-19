@@ -11,6 +11,7 @@ It is available at [https://neverhaveiever.web.app](https://neverhaveiever.web.a
 - choose questions from various categories or cycle through all of them
 - add questions on your own for everyone to see
 - report questions to filter them out for you and for others
+- edit existing questions
 - install this app as a PWA
 
 ![Alt-Text](./assets/iphone-mockup.png)
