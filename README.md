@@ -1,27 +1,32 @@
-# Vue 3 + Typescript + Vite
+# *"Never have I ever"* web app
 
-This template should help get you started developing with Vue 3 and Typescript in Vite.
+Simple progressive web app (PWA) for the little party game called *"never have i ever"* (german: *"Ich hab' noch nie"*.
 
-## Recommended IDE Setup
+It is available at [https://neverhaveiever.web.app](https://neverhaveiever.web.app).
 
-[VSCode](https://code.visualstudio.com/) + [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur). Make sure to enable `vetur.experimental.templateInterpolationService` in settings!
+> **Note:** This app is currently only in german.
 
-### If Using `<script setup>`
+## Features:
+- cycle through shuffled, predefined "never have I ever" questions
+- choose questions from various categories or cycle through all of them
+- add questions on your own for everyone to see
+- report questions to filter them out for you and for others
+- install this app as a PWA
 
-[`<script setup>`](https://github.com/vuejs/rfcs/pull/227) is a feature that is currently in RFC stage. To get proper IDE support for the syntax, use [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar) instead of Vetur (and disable Vetur).
+![Alt-Text](./assets/iphone-mockup.png)
 
-## Type Support For `.vue` Imports in TS
-
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can use the following:
-
-### If Using Volar
-
-Run `Volar: Switch TS Plugin on/off` from VSCode command palette.
-
-### If Using Vetur
-
-1. Install and add `@vuedx/typescript-plugin-vue` to the [plugins section](https://www.typescriptlang.org/tsconfig#plugins) in `tsconfig.json`
-2. Delete `src/shims-vue.d.ts` as it is no longer needed to provide module info to Typescript
-3. Open `src/main.ts` in VSCode
-4. Open the VSCode command palette
-5. Search and run "Select TypeScript version" -> "Use workspace version"
+## Tech stack:
+#### Frontend:
+- [Vue.js 3](https://v3.vuejs.org/) with usage of the Composition API
+- [Vite](https://vitejs.dev/) as the frontend tooling + bundler
+- [TypeScript](https://www.typescriptlang.org/) as primarily used language
+- [TailwindCSS](https://tailwindcss.com/) for css utility classes
+- [Sass](https://sass-lang.com/) for advanced css usage (*scss*)
+- [firebase-orm](https://github.com/yarivluts/firebase-orm) for object-relational typescript mapping of the used firestore database
+  
+#### Backend:
+- [Googles Cloud Firestore](https://firebase.google.com/docs/firestore?hl=en) as the database
+- [Firebase deploy](https://firebase.google.com/) as the hosting
+  
+#### Other:
+- [pwa-asset-generator](https://github.com/onderceylan/pwa-asset-generator) for automatic generation of favicon and PWA assets (splash screens and manifest icons)
