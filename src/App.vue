@@ -29,7 +29,7 @@ export default defineComponent({
   name: 'App',
   components: {MessageBox},
   setup() {
-    if (pwa.mobileBrowser() && !pwa.isPWA()) {
+    if (pwa.mobileBrowser.value && !pwa.isPWA.value) {
       router.push({name: "install"})
     }
     return app;
