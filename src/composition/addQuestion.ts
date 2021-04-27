@@ -73,8 +73,16 @@ const addQuestion = (text: string, categories: Category[], currentCategory: Cate
 
 const add = (): void => {
     addQuestion(text.value, chosenCategories.value, currentCategory.value as Category).then(() => {
+        resetValues();
         goHome();
     });
+};
+
+const resetValues = (): void => {
+    text.value = "";
+    for (let category of categories) {
+        category.isChosen = false;
+    }
 };
 
 export default {
