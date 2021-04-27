@@ -5,7 +5,7 @@
       class="text-black"
       contenteditable="true"
       ref="text"
-      @input="onInput"
+      @blur="onBlur"
       autocapitalize="none"
     >{{text}}</span>.
   </div>
@@ -22,13 +22,31 @@ export default defineComponent({
   mounted() {
     this.focusText();
   },
+  computed: {
+    textField() {
+      return this.$refs.text;
+    }
+  },
   methods: {
-    onInput(e: Event): void {
-      this.$emit("update:text", e.target.innerText);
+    onBlur(e: Event): void {
+      this.$emit("update:text", this.textField.innerText);
     },
-    focusText(): void {
-      this.$refs.text.focus();
+    focusText(e: Event): void {
+      this.textField.focus();
+      // only move cursor to end if not clicked in text field
+      if (!e || e.target !== this.textField) {
+        this.moveCursorToEnd(this.textField);
+      }
     },
+    moveCursorToEnd(element) {
+      // from https://stackoverflow.com/questions/1125292/how-to-move-cursor-to-end-of-contenteditable-entity/3866442#3866442
+      let range = document.createRange();
+      range.selectNodeContents(element);
+      range.collapse(false);//collapse the range to the end point. false means collapse to end rather than the start
+      let selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+    }
   }
 })
 </script>
