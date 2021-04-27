@@ -3,6 +3,7 @@ name: Backup Firestore
 on:
   schedule:
     - cron:  '0 4 * * 0'
+  workflow_dispatch:
 
 env:
   PROJECT_ID: never-have-i-ever-f7386
