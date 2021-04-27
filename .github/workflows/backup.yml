@@ -13,9 +13,9 @@ jobs:
   backup:
     runs-on: ubuntu-latest
     steps:
-      - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+      - uses: google-github-actions/setup-gcloud
         with:
-          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          service_account_key: ${{ secrets.GCP_EXPORT_ACTION_KEY }}
           export_default_credentials: true
       - run: gcloud info
       - run: gcloud config set project $PROJECT_ID
