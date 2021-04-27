@@ -10,6 +10,8 @@ import Question from "../classes/question/Question";
 import {goHome} from "../utils/router";
 
 const text = ref<string>("");
+const categoryMissingMessage = ref<string>("");
+const categoryDropdown = ref<boolean>(false);
 
 const dropdownBlank = reactive<CategoryObjectBase>({
     text: "Kategorien",
@@ -45,7 +47,7 @@ const addQuestion = (text: string, categories: Category[], currentCategory: Cate
     return new Promise((resolve, reject) => {
         if (text) {
             if (categories.length === 0) {
-                store.commit("globalError", "Kategorie wählen");
+                categoryMissingMessage.value = "Kategorie wählen";
                 return reject("no category chosen");
             }
             let question: Question = new Question();
@@ -85,9 +87,17 @@ const resetValues = (): void => {
     }
 };
 
+const openCategory = (): void => {
+    categoryDropdown.value = true;
+    categoryMissingMessage.value = "";
+};
+
 export default {
     text,
+    categoryMissingMessage,
+    categoryDropdown,
     dropdownBlank,
     categories,
+    openCategory,
     add
 }

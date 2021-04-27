@@ -3,7 +3,7 @@
       v-if="message"
       :class="['message-box', 'icon-right', color]"
   >
-    <div class="message">
+    <div class="message" @click="messageClick">
       {{ message }}
     </div>
     <button @click="close">
@@ -31,6 +31,10 @@ export default defineComponent({
       type: String,
       default: "bg-green-600"
     },
+    messageClick: {
+      type: Function,
+      default: () => {}
+    }
   },
   components: {XIcon},
   data: () => ({

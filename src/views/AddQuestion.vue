@@ -6,6 +6,7 @@
           v-model:items="categories"
           :blank="dropdownBlank"
           multiple
+          v-model:dropdown="categoryDropdown"
       ></Dropdown>
     </template>
     <template v-slot:card-top-right-btns>
@@ -30,6 +31,11 @@
       </button>
     </template>
   </Card>
+  <MessageBox
+      v-model:message="categoryMissingMessage"
+      color="bg-red-600"
+      :message-click="openCategory"
+  ></MessageBox>
 </template>
 
 <script lang="ts">
@@ -41,10 +47,11 @@ import { XIcon } from '@heroicons/vue/solid'
 import addQuestion from "../composition/addQuestion";
 import EditQuestionComponent from "../components/EditQuestion.vue";
 import {goHome} from "../utils/router";
+import MessageBox from "../components/MessageBox.vue";
 
 export default defineComponent({
   name: "AddQuestion",
-  components: {EditQuestionComponent, Card, Overlay, XIcon, Dropdown},
+  components: {MessageBox, EditQuestionComponent, Card, Overlay, XIcon, Dropdown},
   setup() {
     return {...addQuestion, goHome};
   }

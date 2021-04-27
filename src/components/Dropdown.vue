@@ -55,13 +55,33 @@ export default defineComponent({
     multiple: {
       type: Boolean,
       default: false
+    },
+    dropdown: {
+      type: Boolean,
+      default: null
     }
   },
+  emits: ['update:dropdown', 'update:items'],
   components: {ChevronDownIcon, CheckIcon, Overlay},
   data: () => ({
-    isOpen: false as boolean,
+    isOpenHelper: false as boolean,
   }),
   computed: {
+    isOpen: {
+      get(): boolean {
+        if (this.dropdown === null) {
+          return this.isOpenHelper;
+        }
+        return this.dropdown;
+      },
+      set(value: boolean): void {
+        if (this.dropdown === null) {
+          this.isOpenHelper = value;
+        } else {
+          this.$emit("update:dropdown", value);
+        }
+      }
+    },
     chosenItems(): CategoryObject[] {
       return this.realItems.filter(i => i.isChosen);
     },
