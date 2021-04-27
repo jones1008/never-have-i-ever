@@ -1,6 +1,10 @@
 import {computed} from "vue";
 import store from "../store";
 
+const currentQuestionPrefix = computed<string>(() => {
+    return store.getters.currentQuestionPrefix;
+});
+
 const globalError = computed<string>({
     get() {
         return store.state.globalError;
@@ -20,6 +24,7 @@ const globalSuccess = computed<string>({
 })
 
 export default {
+    currentQuestionPrefix,
     globalError,
     globalSuccess
 }

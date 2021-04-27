@@ -15,7 +15,7 @@
       </button>
     </template>
     <template v-slot:card-text>
-      <EditQuestionComponent v-model:text="text">...</EditQuestionComponent>
+      <EditQuestionComponent v-model:text="text"></EditQuestionComponent>
     </template>
     <template v-slot:card-action>
       <button

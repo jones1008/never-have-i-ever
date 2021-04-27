@@ -85,6 +85,17 @@ export default createStore({
             }
             return null;
         },
+        currentQuestionPrefix(state, getters): string {
+            let matches = getters.currentQuestion?.text.match(config.questionRegex) ?? [];
+            if (matches.length > 0) {
+                console.log(matches[0]);
+                return matches[0].trim()
+            }
+            return config.defaultPrefix;
+        },
+        currentQuestionSuffix(state, getters): string {
+            return getters.currentQuestion?.text.replace(config.questionRegex, "").trim();
+        },
 
         currentCategory(state, getters): CategoryType {
             let chosenCategoryObj = state.allCategories.find(i => i.isChosen);

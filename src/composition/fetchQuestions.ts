@@ -14,6 +14,10 @@ const currentQuestion = computed<Question>(() => {
     return store.getters.currentQuestion;
 });
 
+const currentQuestionSuffix = computed<string>(() => {
+    return store.getters.currentQuestionSuffix;
+});
+
 const questions = computed<Question[]>({
     get() {
         return store.state.questions;
@@ -39,7 +43,7 @@ const allCategories = computed<CategoryObject[]>({
     set(value: CategoryObject[]) {
         store.commit("allCategories", value)
     }
-})
+});
 
 const currentCategory = computed<CategoryType>(() => {
     return store.getters.currentCategory;
@@ -108,6 +112,7 @@ export default {
     allCategories,
     errorMessage,
     currentQuestion,
+    currentQuestionSuffix,
     questions,
     currentQuestionIndex,
     prevQuestion,

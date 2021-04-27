@@ -28,7 +28,7 @@
           v-else-if="currentQuestion"
           @click="$router.push({name: 'edit-question'})"
       >
-        ...{{currentQuestion.text}}.
+        ...{{currentQuestionSuffix}}.
       </p>
       <p v-else>
         Lädt Fragen...

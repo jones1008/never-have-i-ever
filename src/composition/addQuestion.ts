@@ -9,7 +9,8 @@ import {Category} from "../classes/category/Category";
 import Question from "../classes/question/Question";
 import {goHome} from "../utils/router";
 
-const text = ref<string>("");
+const defaultPrefix = config.defaultPrefix+" "
+const text = ref<string>(defaultPrefix);
 const categoryMissingMessage = ref<string>("");
 const categoryDropdown = ref<boolean>(false);
 
@@ -81,7 +82,7 @@ const add = (): void => {
 };
 
 const resetValues = (): void => {
-    text.value = "";
+    text.value = defaultPrefix;
     for (let category of categories) {
         category.isChosen = false;
     }

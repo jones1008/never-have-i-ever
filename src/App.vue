@@ -1,7 +1,7 @@
 <template>
   <div class="wave"></div>
   <div class="caption">
-    <h1>Ich hab' noch nie...</h1>
+    <h1>{{ currentQuestionPrefix }}...</h1>
   </div>
   <div class="centerer">
     <RouterView></RouterView>

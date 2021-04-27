@@ -21,5 +21,7 @@ export default {
     ],
     defaultCategory: Category.party,
     reportLimit: 3,
-    maxEditSimilarity: 0.75
+    maxEditSimilarity: 0.75,
+    questionRegex: /^ich (hab[e|']*|wurde|bin|war)( noch nie)*/i,
+    defaultPrefix: "Ich hab' noch nie"
 }
