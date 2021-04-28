@@ -62,6 +62,9 @@
                 "Seite hinzufügen zu" - "Startbildschirm"
               </template>
             </span>
+            <template v-if="mobileBrowser === 'Chrome'">
+              oder <SaveIcon></SaveIcon> <span class="italic">"App installieren"</span>
+            </template>
           </li>
           <li>Tippe auf <span class="italic">"Hinzufügen"</span></li>
         </ol>
@@ -79,12 +82,12 @@ import {defineComponent} from "vue";
 import Overlay from "../components/Overlay.vue";
 import Card from "../components/Card.vue";
 import pwa from "../composition/pwa";
-import {XIcon, DotsVerticalIcon, MenuIcon} from '@heroicons/vue/solid';
+import {XIcon, DotsVerticalIcon, MenuIcon, SaveIcon} from '@heroicons/vue/solid';
 import {goHome} from "../utils/router";
 
 export default defineComponent({
   name: "Install",
-  components: {Overlay, Card, XIcon, DotsVerticalIcon, MenuIcon},
+  components: {Overlay, Card, XIcon, DotsVerticalIcon, MenuIcon, SaveIcon},
   setup() {
     return {...pwa, goHome}
   }
