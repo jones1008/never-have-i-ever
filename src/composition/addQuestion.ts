@@ -46,7 +46,7 @@ const optimizeQuestion = (text: string): string => {
 
 const addQuestion = (text: string, categories: Category[], currentCategory: Category): Promise<Question> => {
     return new Promise((resolve, reject) => {
-        if (text) {
+        if (text && text.trim() != config.defaultPrefix) {
             if (categories.length === 0) {
                 categoryMissingMessage.value = "Kategorie wählen";
                 return reject("no category chosen");
