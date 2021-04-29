@@ -44,7 +44,7 @@ const optimizeQuestion = (text: string): string => {
     return text;
 }
 
-const addQuestion = (text: string, categories: Category[], currentCategory: Category): Promise<Question> => {
+const addQuestion = (text: string, categories: Category[]): Promise<Question> => {
     return new Promise((resolve, reject) => {
         if (text && text.trim() != config.defaultPrefix) {
             if (categories.length === 0) {
@@ -58,10 +58,8 @@ const addQuestion = (text: string, categories: Category[], currentCategory: Cate
             return question.save().then((createdQuestion) => {
                 store.commit("globalSuccess", "hinzugefügt");
 
-                // add to questions if category is currently being viewed
-                if (categories.includes(currentCategory)) {
-                    store.commit("addToQuestions", createdQuestion);
-                }
+                // add to questions
+                store.commit("addToQuestions", createdQuestion);
                 return resolve(createdQuestion);
             }).catch(err => {
                 store.commit("globalError", "Fehler beim Hinzufügen");
@@ -75,7 +73,7 @@ const addQuestion = (text: string, categories: Category[], currentCategory: Cate
 }
 
 const add = (): void => {
-    addQuestion(text.value, chosenCategories.value, currentCategory.value as Category).then(() => {
+    addQuestion(text.value, chosenCategories.value).then(() => {
         resetValues();
         goHome();
     });

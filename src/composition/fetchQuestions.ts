@@ -18,22 +18,21 @@ const currentQuestionSuffix = computed<string>(() => {
     return store.getters.currentQuestionSuffix;
 });
 
-const questions = computed<Question[]>({
+const currentQuestions = computed<Question[]>(() => {
+    return store.getters.currentQuestions;
+});
+
+const allQuestions = computed<Question[]>( {
     get() {
-        return store.state.questions;
+        return store.state.allQuestions;
     },
-    set(value: Question[]) {
-        store.commit("questions", value);
+    set(value) {
+        store.commit("allQuestions", value);
     }
 });
 
-const currentQuestionIndex = computed<number>({
-    get() {
-        return store.state.currentQuestionIndex;
-    },
-    set(value: number) {
-        store.commit("currentQuestionIndex", value);
-    }
+const currentCategoryIndex = computed<number>(() => {
+    return store.getters.currentCategoryIndex;
 })
 
 const allCategories = computed<CategoryObject[]>({
@@ -53,20 +52,13 @@ const getAllQuestions = async (): Promise<Question[]> => {
     return reportLimitQuery().get();
 }
 
-const getQuestions = async(category: CategoryType): Promise<Question[]> =>{
-    if (category == "all") {
-        return getAllQuestions();
-    }
-    return reportLimitQuery().where("categories", "array-contains", category).get();
-}
-
 const reportLimitQuery = (): Query<any> => {
     return Question.query().where("reports", "<", config.reportLimit);
 }
 
 const fetch = async (): Promise<void> => {
-    questions.value = await fetchQuestions(currentCategory.value);
-    if (!questions || questions.value.length === 0) {
+    allQuestions.value = await fetchQuestions();
+    if (!allQuestions || allQuestions.value.length === 0) {
         errorMessage.value = "Keine Fragen gefunden..."
     }
 };
@@ -78,16 +70,9 @@ const prevQuestion = () => {
     return store.dispatch("prevQuestion");
 }
 
-watch(
-    () => currentCategory.value,
-    () => {
-        fetch();
-    }
-);
-
-const fetchQuestions = (category: CategoryType): Promise<Question[]> => {
+const fetchQuestions = (): Promise<Question[]> => {
     return new Promise((resolve, reject) => {
-        return getQuestions(category).then(questions => {
+        return getAllQuestions().then(questions => {
             questions = filterReported(questions);
 
             if (questions.length === 0) {
@@ -113,8 +98,8 @@ export default {
     errorMessage,
     currentQuestion,
     currentQuestionSuffix,
-    questions,
-    currentQuestionIndex,
+    currentQuestions,
+    currentCategoryIndex,
     prevQuestion,
     nextQuestion,
     fetch

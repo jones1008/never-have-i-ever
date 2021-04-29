@@ -43,7 +43,9 @@ const reportQuestion = (question: Question): Promise<Question> => {
 const removeQuestion = (question: Question): void => {
     store.commit("removeQuestion", question);
     if (!store.getters.isFirstQuestion) {
-        store.commit("currentQuestionIndex", --store.state.currentQuestionIndex);
+        let categoryIndex = store.getters.currentCategoryIndexObject;
+        --categoryIndex.index;
+        store.commit("currentCategoryIndex", categoryIndex);
         store.dispatch("nextQuestion");
     }
 }

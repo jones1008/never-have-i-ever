@@ -1,4 +1,4 @@
 export enum Category {
-    hot,
-    party
+    hot = "hot",
+    party = "party"
 }

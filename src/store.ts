@@ -5,6 +5,8 @@ import config from "./config";
 import clone from "./utils/clone";
 import CategoryObject from "./classes/category/CategoryObject";
 import {CategoryType} from "./classes/category/CategoryType";
+import {Category} from "./classes/category/Category";
+import CategoryIndex from "./classes/category/CategoryIndex";
 
 // Create a new store instance.
 export default createStore({
@@ -27,11 +29,16 @@ export default createStore({
             defaultCategory.isChosen = true;
         }
 
+        let categoryIndices: CategoryIndex[] = [new CategoryIndex("all")];
+        for (let value in Category) {
+            categoryIndices.push(new CategoryIndex(value as CategoryType));
+        }
+
         return {
             globalSuccess: null,
             globalError: null,
-            questions: [] as Question[],
-            currentQuestionIndex: 0 as number,
+            allQuestions: [] as Question[],
+            categoryIndices: categoryIndices as CategoryIndex[],
             allCategories: allCategories as CategoryObject[]
         }
     },
@@ -46,12 +53,12 @@ export default createStore({
             state.globalError = value;
         },
 
-        questions(state: any, value) {
-            state.questions = value;
+        allQuestions(state: any, value) {
+            state.allQuestions = value;
         },
 
         setQuestion(state: any, question: Question) {
-            let foundQuestion = state.questions.find(q => q.id === question.id);
+            let foundQuestion = state.allQuestions.find(q => q.id === question.id);
 
             if (foundQuestion) {
                 foundQuestion = question;
@@ -59,19 +66,20 @@ export default createStore({
         },
 
         removeQuestion(state: any, question: Question) {
-            let foundQuestionIndex = state.questions.findIndex(q => q.id === question.id);
+            let foundQuestionIndex = state.allQuestions.findIndex(q => q.id === question.id);
 
             if (foundQuestionIndex !== -1) {
-                state.questions.splice(foundQuestionIndex, 1);
+                state.allQuestions.splice(foundQuestionIndex, 1);
             }
         },
 
         addToQuestions(state: any, question: Question) {
-            state.questions.push(question);
+            state.allQuestions.push(question);
         },
 
-        currentQuestionIndex(state: any, value) {
-            state.currentQuestionIndex = value;
+        currentCategoryIndex(state: any, categoryIndex: CategoryIndex) {
+            let categoryIndexObj = state.categoryIndices.find(c => c.category === categoryIndex.category);
+            categoryIndexObj = categoryIndex;
         },
 
         allCategories(state: any, value) {
@@ -79,16 +87,22 @@ export default createStore({
         },
     },
     getters: {
+        currentQuestions(state, getters): Question[] {
+            let category = getters.currentCategory;
+            if (category === "all") {
+                return state.allQuestions;
+            }
+            return state.allQuestions.filter(q => q.categories.includes(category))
+        },
         currentQuestion(state, getters): Question | null {
-            if (state.questions.length > 0) {
-                return state.questions[state.currentQuestionIndex];
+            if (getters.currentQuestions.length > 0) {
+                return getters.currentQuestions[getters.currentCategoryIndex];
             }
             return null;
         },
         currentQuestionPrefix(state, getters): string {
             let matches = getters.currentQuestion?.text.match(config.questionRegex) ?? [];
             if (matches.length > 0) {
-                console.log(matches[0]);
                 return matches[0].trim()
             }
             return config.defaultPrefix;
@@ -104,29 +118,46 @@ export default createStore({
             }
             return "all"
         },
+        currentCategoryIndexObject(state, getters): CategoryIndex | null {
+            let obj = state.categoryIndices.find(c => c.category === getters.currentCategory);
+            return obj || null;
+        },
+        currentCategoryIndex(state, getters): number {
+            let obj = getters.currentCategoryIndexObject;
+            if (obj) {
+                return obj.index;
+            }
+            return 0;
+        },
 
         isLastQuestion(state, getters): boolean {
-            return state.currentQuestionIndex >= state.questions.length - 1;
+            return getters.currentCategoryIndex >= getters.currentQuestions.length - 1;
         },
 
         isFirstQuestion(state, getters): boolean {
-            return state.currentQuestionIndex === 0;
+            return getters.currentCategoryIndex === 0;
         },
     },
     actions: {
         nextQuestion(context): void {
+            let categoryIndex = context.getters.currentCategoryIndexObject;
             if (context.getters.isLastQuestion) {
-                context.commit("currentQuestionIndex", 0);
+                categoryIndex.index = 0;
+                context.commit("currentCategoryIndex", 0);
             } else {
-                context.commit("currentQuestionIndex", ++context.state.currentQuestionIndex);
+                ++categoryIndex.index;
+                context.commit("currentCategoryIndex", categoryIndex);
             }
         },
 
         prevQuestion(context): void {
+            let categoryIndex = context.getters.currentCategoryIndexObject;
             if (context.getters.isFirstQuestion) {
-                context.commit("currentQuestionIndex", context.state.questions.length - 1);
+                categoryIndex.index = context.getters.currentQuestions.length - 1
+                context.commit("currentCategoryIndex", categoryIndex);
             } else {
-                context.commit("currentQuestionIndex", --context.state.currentQuestionIndex);
+                --categoryIndex.index;
+                context.commit("currentCategoryIndex", categoryIndex);
             }
         }
     }

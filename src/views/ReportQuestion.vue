@@ -16,7 +16,7 @@
     </template>
     <template v-slot:card-text>
       <span class="text-gray-500">
-        ...{{currentQuestion?.text}}.
+        {{currentQuestion?.text}}.
       </span>
     </template>
     <template v-slot:card-action>

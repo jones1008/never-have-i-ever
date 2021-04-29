@@ -39,7 +39,7 @@
         v-if="currentQuestion && !errorMessage"
     >
       <span class="absolute bottom-24 right-7 text-gray-400 text-sm font-bold">
-        {{currentQuestionIndex+1}} / {{questions.length}}
+        {{currentCategoryIndex+1}} / {{currentQuestions.length}}
       </span>
     </template>
     <template v-slot:card-action>
