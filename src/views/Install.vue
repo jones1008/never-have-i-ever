@@ -36,7 +36,7 @@
             </template>
           </li>
           <li class="relative">
-            Tippe auf
+            Tippe im Browser auf Menü
             <span class="italic">
               <template v-if="mobileBrowser === 'Safari'">
                 &nbsp;<img src="../img/apple-share.png">
@@ -66,7 +66,7 @@
               oder <SaveIcon></SaveIcon> <span class="italic">"App installieren"</span>
             </template>
           </li>
-          <li>Tippe auf <span class="italic">"Hinzufügen"</span></li>
+          <li>Bestätige das Hinzufügen zum Startbildschirm</li>
         </ol>
         <br>
         <p>
