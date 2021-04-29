@@ -20,7 +20,7 @@ export default defineComponent({
     text: String
   },
   mounted() {
-    this.focusText();
+    this.focusText(null);
   },
   computed: {
     textField() {
@@ -31,7 +31,7 @@ export default defineComponent({
     onBlur(e: Event): void {
       this.$emit("update:text", this.textField.innerText);
     },
-    focusText(e: Event): void {
+    focusText(e: Event | null): void {
       this.textField.focus();
       // only move cursor to end if not clicked in text field
       if (!e || e.target !== this.textField) {
@@ -44,13 +44,17 @@ export default defineComponent({
       range.selectNodeContents(element);
       range.collapse(false);//collapse the range to the end point. false means collapse to end rather than the start
       let selection = window.getSelection();
-      selection.removeAllRanges();
-      selection.addRange(range);
+      if (selection) {
+        selection.removeAllRanges();
+        selection.addRange(range);
+      }
     }
   }
 })
 </script>
 
 <style scoped>
-
+[contenteditable] {
+  outline: 0 solid transparent;
+}
 </style>

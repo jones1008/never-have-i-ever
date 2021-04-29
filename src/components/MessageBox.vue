@@ -38,7 +38,7 @@ export default defineComponent({
   },
   components: {XIcon},
   data: () => ({
-    timeoutInstance: null
+    timeoutInstance: null as number | null
   }),
   created() {
     this.startTimeout();
