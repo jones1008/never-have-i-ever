@@ -10,7 +10,7 @@
         class="item blank"
         @click="isOpen = !isOpen"
     >
-      <div :class="['icon', blank.iconColor]">
+      <div :class="['icon', blank.iconColors]">
         <ChevronDownIcon></ChevronDownIcon>
       </div>
       <span v-show="chosenItems.length === 0 || isOpen">
@@ -18,7 +18,7 @@
       </span>
       <div
           v-show="chosenItems.length > 0 && !isOpen"
-          class="text-black"
+          class="text-black dark:text-gray-300"
       >
         {{ chosenItems.map(i => i.text).join(', ') }}
       </div>
@@ -31,11 +31,11 @@
         @click="isOpen ? item.isChosen ? unselect(item) : select(item) : isOpen = true"
     >
       <div class="icon">
-        <component :is="item.icon" :class="item.iconColor"></component>
+        <component :is="item.icon" :class="item.iconColors"></component>
       </div>
       {{ item.text }}&nbsp;
       <ChevronDownIcon v-show="item.isChosen && !isOpen"></ChevronDownIcon>
-      <CheckIcon v-show="item.isChosen && isOpen" class="text-blue-600"></CheckIcon>
+      <CheckIcon v-show="item.isChosen && isOpen" class="text-blue-600 dark:text-blue-300"></CheckIcon>
     </div>
   </div>
 </template>

@@ -6,7 +6,7 @@ $card-height: 75vh;
   @apply flex justify-center items-center flex-col;
   @apply shadow-2xl;
   border-radius: 2.5rem;
-  @apply bg-white;
+  @apply bg-white dark:bg-gray-800 dark:text-white;
   .card-top {
     @apply absolute p-4 top-0;
     width: 100%;

@@ -6,7 +6,7 @@
     </template>
     <template v-slot:card-top-right-btns>
       <button
-          class="btn btn-small icon bg-gray-400 m-2"
+          class="btn btn-small icon btn-gray m-2"
           @click="goHome"
       >
         <XIcon></XIcon>
@@ -17,12 +17,12 @@
         <br>
         <br>
         <div class="pseudo-apps">
-          <div class="bg-gray-300"></div>
+          <div class="bg-gray-300 dark:bg-gray-600"></div>
           <div>
             <img src="../img/app-icon.png">
           </div>
-          <div class="bg-gray-300"></div>
-          <div class="bg-gray-200"></div>
+          <div class="bg-gray-300 dark:bg-gray-600"></div>
+          <div class="bg-gray-200 dark:bg-gray-700"></div>
         </div>
         <br>
         <ol class="relative">

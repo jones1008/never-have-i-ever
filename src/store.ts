@@ -18,7 +18,7 @@ export default createStore({
             {
                 text: "Alle",
                 value: "all",
-                iconColor: "text-yellow-600",
+                iconColors: ["text-yellow-600", "dark:text-yellow-400"],
                 isChosen: false,
                 icon: SparklesIcon
             } as CategoryObject,

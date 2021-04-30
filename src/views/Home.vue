@@ -5,7 +5,7 @@
     </template>
     <template v-slot:card-top-right-btns>
       <button
-          class="btn btn-small icon bg-gray-400 m-2"
+          class="btn btn-small icon btn-gray m-2"
           @click="$router.push({name: 'report-question'})"
       >
         <FlagIcon class="p-2"></FlagIcon>
@@ -44,7 +44,7 @@
     </template>
     <template v-slot:card-action>
       <button
-          class="btn icon bg-gray-400"
+          class="btn icon btn-gray"
           @click="prevQuestion"
       >
         <ChevronLeftIcon></ChevronLeftIcon>

@@ -2,7 +2,7 @@
   <div @click="focusText">
     <slot></slot>
     <span
-      class="text-black"
+      class="text-black dark:text-white"
       contenteditable="true"
       ref="text"
       @blur="onBlur"

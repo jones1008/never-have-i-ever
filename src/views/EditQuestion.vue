@@ -8,7 +8,7 @@
     </template>
     <template v-slot:card-top-right-btns>
       <button
-          class="btn btn-small icon bg-gray-400 m-2"
+          class="btn btn-small icon btn-gray m-2"
           @click="goHome"
       >
         <XIcon></XIcon>

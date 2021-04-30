@@ -8,14 +8,14 @@
     </template>
     <template v-slot:card-top-right-btns>
       <button
-          class="btn btn-small icon bg-gray-400 m-2"
+          class="btn btn-small icon btn-gray m-2"
           @click="goHome"
       >
         <XIcon></XIcon>
       </button>
     </template>
     <template v-slot:card-text>
-      <span class="text-gray-500">
+      <span class="text-gray-500 dark:text-gray-300">
         {{currentQuestion?.text}}.
       </span>
     </template>

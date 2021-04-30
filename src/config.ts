@@ -1,5 +1,5 @@
 import {Category} from "./classes/category/Category";
-import { FireIcon, CakeIcon } from '@heroicons/vue/outline'
+import {FireIcon, CakeIcon} from '@heroicons/vue/outline';
 import CategoryObject from "./classes/category/CategoryObject";
 
 export default {
@@ -7,14 +7,14 @@ export default {
         {
             text: "Hot",
             value: Category.hot,
-            iconColor: "text-red-600",
+            iconColors: ["text-red-600", "dark:text-red-500"],
             isChosen: false,
             icon: FireIcon
         } as CategoryObject,
         {
             text: "Party",
             value: Category.party,
-            iconColor: "text-purple-600",
+            iconColors: ["text-purple-600", "dark:text-purple-400"],
             isChosen: false,
             icon: CakeIcon
         } as CategoryObject
