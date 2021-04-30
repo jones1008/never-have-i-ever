@@ -13,6 +13,7 @@ It is available at [https://neverhaveiever.web.app](https://neverhaveiever.web.a
 - report questions to filter them out for you and for others
 - edit existing questions
 - install this app as a PWA
+- dark mode
 
 ![Alt-Text](./assets/iphone-mockup.png)
 
