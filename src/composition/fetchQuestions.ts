@@ -14,6 +14,10 @@ const currentQuestion = computed<Question>(() => {
     return store.getters.currentQuestion;
 });
 
+const currentQuestionPrefix = computed<string>(() => {
+    return store.getters.currentQuestionPrefix;
+});
+
 const currentQuestionSuffix = computed<string>(() => {
     return store.getters.currentQuestionSuffix;
 });
@@ -98,6 +102,7 @@ export default {
     errorMessage,
     currentQuestion,
     currentQuestionSuffix,
+    currentQuestionPrefix,
     currentQuestions,
     currentCategoryIndex,
     prevQuestion,

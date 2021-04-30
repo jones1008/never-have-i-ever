@@ -1,7 +1,10 @@
 <template>
   <div class="wave"></div>
   <div class="caption">
-    <h1>{{ currentQuestionPrefix }}...</h1>
+    <h1>
+      <template v-if="currentQuestionPrefix">{{ currentQuestionPrefix }}...</template>
+      <template v-else>{{defaultPrefix}}</template>
+    </h1>
   </div>
   <div class="centerer">
     <RouterView></RouterView>
@@ -24,11 +27,13 @@ import MessageBox from './components/MessageBox.vue';
 import pwa from "./composition/pwa";
 import app from "./composition/app";
 import router from "./router";
+// import store from "./store";
 
 export default defineComponent({
   name: 'App',
   components: {MessageBox},
   setup() {
+    // store.commit("globalSuccess", "hinzugefügt");
     if (pwa.mobileBrowser.value && !pwa.isPWA.value) {
       router.push({name: "install"})
     }

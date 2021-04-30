@@ -7,6 +7,7 @@ import CategoryObject from "./classes/category/CategoryObject";
 import {CategoryType} from "./classes/category/CategoryType";
 import {Category} from "./classes/category/Category";
 import CategoryIndex from "./classes/category/CategoryIndex";
+import questionParser from "./utils/questionParser";
 
 // Create a new store instance.
 export default createStore({
@@ -100,15 +101,20 @@ export default createStore({
             }
             return null;
         },
-        currentQuestionPrefix(state, getters): string {
-            let matches = getters.currentQuestion?.text.match(config.questionRegex) ?? [];
-            if (matches.length > 0) {
-                return matches[0].trim()
+        currentQuestionPrefix(state, getters): string | null {
+            if (getters.currentQuestion) {
+                let prefix = questionParser.getPrefix(getters.currentQuestion);
+                if (prefix) {
+                    return prefix.trim();
+                }
             }
-            return config.defaultPrefix;
+            return null
         },
-        currentQuestionSuffix(state, getters): string {
-            return getters.currentQuestion?.text.replace(config.questionRegex, "").trim();
+        currentQuestionSuffix(state, getters): string | null {
+            if (getters.currentQuestion) {
+                return questionParser.getSuffix(getters.currentQuestion).trim();
+            }
+            return null;
         },
 
         currentCategory(state, getters): CategoryType {

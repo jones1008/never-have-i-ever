@@ -25,10 +25,10 @@
         {{ errorMessage }}
       </p>
       <p
-          v-else-if="currentQuestion"
+          v-else-if="currentQuestionSuffix"
           @click="$router.push({name: 'edit-question'})"
       >
-        ...{{currentQuestionSuffix}}.
+        <span v-if="currentQuestionPrefix">...</span>{{currentQuestionSuffix}}.
       </p>
       <p v-else>
         Lädt Fragen...

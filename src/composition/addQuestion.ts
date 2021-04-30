@@ -8,6 +8,7 @@ import store from "../store";
 import {Category} from "../classes/category/Category";
 import Question from "../classes/question/Question";
 import {goHome} from "../utils/router";
+import questionParser from "../utils/questionParser";
 
 const defaultPrefix = config.defaultPrefix+" "
 const text = ref<string>(defaultPrefix);
@@ -44,16 +45,25 @@ const optimizeQuestion = (text: string): string => {
     return text;
 }
 
+const questionExists = (question: Question): boolean => {
+    let existingQuestion = store.state.allQuestions.find(q => questionParser.getSuffix(q) === questionParser.getSuffix(question));
+    return !!existingQuestion;
+};
+
 const addQuestion = (text: string, categories: Category[]): Promise<Question> => {
     return new Promise((resolve, reject) => {
         if (text && text.trim() != config.defaultPrefix) {
+            let question: Question = new Question();
+            question.text = optimizeQuestion(text);
+            question.reports = 0;
+            if (questionExists(question)) {
+                store.commit("globalError", "Frage gibt es schon");
+                return reject("question already exists");
+            }
             if (categories.length === 0) {
                 categoryMissingMessage.value = "Kategorie wählen";
                 return reject("no category chosen");
             }
-            let question: Question = new Question();
-            question.text = optimizeQuestion(text);
-            question.reports = 0;
             question.categories = categories;
             return question.save().then((createdQuestion) => {
                 store.commit("globalSuccess", "hinzugefügt");

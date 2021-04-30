@@ -1,5 +1,8 @@
-import {computed} from "vue";
+import {computed, ref} from "vue";
 import store from "../store";
+import config from "../config";
+
+const defaultPrefix = ref<string>(config.defaultPrefix);
 
 const currentQuestionPrefix = computed<string>(() => {
     return store.getters.currentQuestionPrefix;
@@ -24,6 +27,7 @@ const globalSuccess = computed<string>({
 })
 
 export default {
+    defaultPrefix,
     currentQuestionPrefix,
     globalError,
     globalSuccess
