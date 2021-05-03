@@ -54,3 +54,12 @@
 a {
   color: royalblue !important;
 }
+ol, ul {
+  @apply text-left sm:text-xl md:text-2xl;
+  list-style: revert !important;
+  padding-inline-start: 1rem !important;
+  li {
+    @apply my-2;
+  }
+}
+@import "card-text-center";

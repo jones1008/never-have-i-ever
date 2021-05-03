@@ -1,0 +1,11 @@
+.inline-fire {
+    @apply relative -top-1 inline w-10 text-red-600 ;
+}
+.card-taller {
+    min-height: 90vh;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+li {
+    @apply mt-4;
+}

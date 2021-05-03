@@ -2,7 +2,7 @@
   <Overlay></Overlay>
   <Card>
     <template v-slot:card-top>
-      <h1 class="dynamic-heading m-5">App installieren</h1>
+      <h1 class="dynamic-heading card-heading-center-left m-5">App installieren</h1>
     </template>
     <template v-slot:card-top-right-btns>
       <button
@@ -36,18 +36,15 @@
             </template>
           </li>
           <li class="relative">
-            Tippe im Browser auf Menü
-            <span class="italic">
-              <template v-if="mobileBrowser === 'Safari'">
-                &nbsp;<img src="../img/apple-share.png">
-              </template>
-              <template v-else-if="mobileBrowser === 'Chrome'">
-                <DotsVerticalIcon></DotsVerticalIcon>
-              </template>
-              <template v-else>
-                <MenuIcon></MenuIcon>
-              </template>
-            </span>
+            <template v-if="mobileBrowser === 'Safari'">
+              Tippe auf&nbsp;&nbsp;<img src="../img/apple-share.png">
+            </template>
+            <template v-else-if="mobileBrowser === 'Chrome'">
+              Tippe im Browser auf&nbsp;<DotsVerticalIcon></DotsVerticalIcon>
+            </template>
+            <template v-else>
+              Tippe im Browser auf Menü&nbsp;&nbsp;<MenuIcon></MenuIcon>
+            </template>
           </li>
           <li>
             Wähle

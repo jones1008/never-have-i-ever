@@ -67,12 +67,26 @@ import Dropdown from "../components/Dropdown.vue";
 import { ChevronLeftIcon, PlusIcon, FlagIcon } from '@heroicons/vue/solid'
 import fetchQuestions from "../composition/fetchQuestions";
 
+function showIntro(to, from, next) {
+  if (to.name === "home" && (!from.name || from.name === "install" || from.name === "home")) {
+    next({name: "intro"});
+  } else {
+    next();
+  }
+}
+
 export default defineComponent({
   name: 'Home',
   components: {Dropdown, ChevronLeftIcon, PlusIcon, Card, FlagIcon},
   setup() {
     fetchQuestions.fetch();
     return fetchQuestions;
+  },
+  beforeRouteUpdate(to, from, next) {
+    showIntro(to, from, next);
+  },
+  beforeRouteEnter(to, from, next) {
+    showIntro(to, from, next);
   }
 })
 </script>

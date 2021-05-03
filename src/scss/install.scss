@@ -1,36 +1,24 @@
 .card {
   @apply fixed;
   height: 92vh;
-  .dynamic-heading {
-    width: calc(100% - 5rem);
+}
+ol {
+  svg, img {
+    @apply w-6 inline;
+  }
+  img {
+    @apply absolute -top-1;
   }
 }
-.card-text-container {
-  @apply text-gray-600 dark:text-gray-100 font-normal text-lg;
-  @apply relative max-w-md m-auto;
-  ol {
-    @apply text-left sm:text-xl md:text-2xl;
-    list-style: revert;
-    li {
-      @apply my-2;
-    }
-    svg, img {
-      @apply w-6 inline;
-    }
+.pseudo-apps {
+  @apply flex justify-center;
+  div {
+    max-width: 80px;
+    min-width: 80px;
+    height: 80px;
+    @apply rounded-2xl mx-3;
     img {
-      @apply absolute -top-1;
-    }
-  }
-  .pseudo-apps {
-    @apply flex justify-center;
-    div {
-      max-width: 80px;
-      min-width: 80px;
-      height: 80px;
-      @apply rounded-2xl mx-3;
-      img {
-        @apply rounded-2xl;
-      }
+      @apply rounded-2xl;
     }
   }
 }

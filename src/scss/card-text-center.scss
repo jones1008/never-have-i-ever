@@ -1,0 +1,9 @@
+.card {
+    .card-heading-center-left {
+        width: calc(100% - 5rem);
+    }
+    .card-text-container {
+        @apply text-gray-600 dark:text-gray-100 font-normal text-lg;
+        @apply relative max-w-md m-auto;
+    }
+}
