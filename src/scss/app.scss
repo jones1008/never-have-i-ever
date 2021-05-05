@@ -6,6 +6,9 @@
   @apply font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white;
   @apply flex items-center justify-center;
   height: 15vh;
+  h1 {
+    position: relative;
+  }
 }
 .wave {
   @apply absolute top-0;
@@ -63,3 +66,11 @@ ol, ul {
   }
 }
 @import "card-text-center";
+
+@media (display-mode: standalone) and (orientation: portrait) {
+  .caption {
+    h1 {
+      top: 10px;
+    }
+  }
+}
